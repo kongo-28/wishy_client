@@ -2,13 +2,16 @@ import React from "react";
 import Link from "next/link";
 import { GetServerSideProps } from "next";
 import { withAuthServerSideProps } from "@/lib/auth";
+import ResponsiveAppBar from "@/components/ResponsiveAppBar";
+import styles from "@/styles/Home.module.css";
 
 export const getServerSideProps: GetServerSideProps =
   withAuthServerSideProps("/wishes");
 
 const Home = (props: any) => {
   return (
-    <div>
+    <div className={styles.main}>
+      <ResponsiveAppBar />
       {props.user && (
         // ユーザーがいる場合に表示させるコンポーネント
         <div>{props.user.email}でログイン中</div>
