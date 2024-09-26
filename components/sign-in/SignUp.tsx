@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { ChangeEvent, useState } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Checkbox from "@mui/material/Checkbox";
@@ -15,6 +15,9 @@ import { styled } from "@mui/material/styles";
 import ForgotPassword from "./ForgotPassword";
 import AppTheme from "../shared-theme/AppTheme";
 import ColorModeSelect from "../shared-theme/ColorModeSelect";
+import axios from "axios";
+import { useRouter } from "next/router";
+import Cookies from "js-cookie";
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: "flex",
@@ -75,6 +78,10 @@ export default function SignUp(props: { disableCustomTheme?: boolean }) {
     setOpen(false);
   };
 
+  const router = useRouter();
+  const [isError, setIsError] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string>("");
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -83,6 +90,37 @@ export default function SignUp(props: { disableCustomTheme?: boolean }) {
       password: data.get("password"),
       password_confirmation: data.get("password_confirmation"),
     });
+    const axiosInstance = axios.create({
+      baseURL: `http://localhost:3000/`,
+      headers: {
+        "content-type": "application/json",
+      },
+    });
+    (async () => {
+      setIsError(false);
+      setErrorMessage("");
+      return await axiosInstance
+        .post("auth", {
+          email: data.get("email"),
+          password: data.get("password"),
+          password_confirmation: data.get("password_confirmation"),
+        })
+        .then(function (response) {
+          // Cookieにトークンをセット
+          Cookies.set("uid", response.headers["uid"]);
+          Cookies.set("client", response.headers["client"]);
+          Cookies.set("access-token", response.headers["access-token"]);
+          router.push("/");
+        })
+        .catch(function (error) {
+          // Cookieからトークンを削除
+          Cookies.remove("uid");
+          Cookies.remove("client");
+          Cookies.remove("access-token");
+          setIsError(true);
+          // setErrorMessage(error.response.data.errors[0]);
+        });
+    })();
   };
 
   const validateInputs = () => {
