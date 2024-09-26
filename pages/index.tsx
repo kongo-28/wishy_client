@@ -29,7 +29,9 @@ const Home = (props: any) => {
       </div>
       <div>
         {props.wishes.map((wish: any) => (
-          <Wish wish={wish}></Wish>
+          <div key={wish.id} className={styles.postCard}>
+            <Wish wish={wish}></Wish>
+          </div>
         ))}
       </div>
     </div>
