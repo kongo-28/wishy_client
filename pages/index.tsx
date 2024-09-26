@@ -19,14 +19,17 @@ const Home = (props: any) => {
       )}
       {!props.user && (
         // ユーザーがいない場合に表示させるコンポーネント
-        <div>未ログインです</div>
+        <div>
+          未ログインです
+          <div>
+            <Link href="http://localhost:3001/signin">signin</Link>
+          </div>
+          <div>
+            <Link href="http://localhost:3001/signup">signup</Link>
+          </div>
+        </div>
       )}
-      <div>
-        <Link href="http://localhost:3001/signin">signin</Link>
-      </div>
-      <div>
-        <Link href="http://localhost:3001/signup">signup</Link>
-      </div>
+
       <div>
         {props.wishes.map((wish: any) => (
           <div key={wish.id} className={styles.postCard}>
