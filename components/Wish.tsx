@@ -7,6 +7,7 @@ import IconButton from "@mui/material/IconButton";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import { pink } from "@mui/material/colors";
+import LocalFireDepartmentIcon from "@mui/icons-material/LocalFireDepartment";
 
 const Wish = ({ wish }: any) => {
   const [likes, setLikes] = useState(0);
@@ -34,7 +35,7 @@ const Wish = ({ wish }: any) => {
             aria-label="add to favorites"
             onClick={() => setLikes(likes + 9)}
           >
-            <FavoriteIcon sx={{ fontSize: 50, color: pink[500] }} />
+            <LocalFireDepartmentIcon sx={{ fontSize: 50, color: pink[500] }} />
           </IconButton>
           <IconButton aria-label="share" onClick={() => setLikes(likes + 100)}>
             <ShareIcon />
