@@ -12,6 +12,7 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import Link from "next/link";
+import HomeIcon from "@mui/icons-material/Home";
 
 const pages = ["New_Wish", "Pricing", "Blog"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
@@ -48,7 +49,7 @@ function ResponsiveAppBar() {
               variant="h6"
               noWrap
               component="a"
-              href="#app-bar-with-responsive-menu"
+              href="/"
               sx={{
                 mr: 2,
                 display: { xs: "none", md: "flex" },
@@ -59,6 +60,7 @@ function ResponsiveAppBar() {
                 textDecoration: "none",
               }}
             >
+              <HomeIcon sx={{ mr: 1, fontSize: 30 }} />
               Wishy
             </Typography>
 
