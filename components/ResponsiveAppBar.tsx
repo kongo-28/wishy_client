@@ -174,7 +174,7 @@ function ResponsiveAppBar() {
                 {settings.map((setting) => (
                   <MenuItem key={setting} onClick={handleCloseUserMenu}>
                     <Typography sx={{ textAlign: "center" }}>
-                      {setting}
+                      <Link href={`/${setting.toLowerCase()}`}>{setting}</Link>
                     </Typography>
                   </MenuItem>
                 ))}
