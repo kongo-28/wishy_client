@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useOptimistic, useState } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
@@ -8,9 +8,34 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import { pink } from "@mui/material/colors";
 import LocalFireDepartmentIcon from "@mui/icons-material/LocalFireDepartment";
+import axios from "axios";
 
-const Wish = ({ wish }: any) => {
-  const [likes, setLikes] = useState(0);
+const Wish = ({ wish, user }: any) => {
+  const [likes, setLikes] = useState(
+    wish.likes[0].count ? wish.likes[0].count : 0
+  );
+
+  useEffect(() => {
+    const handleBeforeUnload = async (event: any) => {
+      event.preventDefault();
+      try {
+        await axios.post("http://localhost:3000/likes", {
+          user_id: user.id,
+          wish_id: wish.id,
+          count: likes,
+        });
+      } catch (error) {
+        console.error("Failed to save likes on unload:", error);
+      }
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    // クリーンアップ関数でイベントリスナーを解除
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, [likes, user.id]);
 
   return (
     <div>
