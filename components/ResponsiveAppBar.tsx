@@ -13,9 +13,12 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import Link from "next/link";
 import HomeIcon from "@mui/icons-material/Home";
+import { useRouter } from "next/router";
+import Cookies from "js-cookie";
+import axios from "axios";
 
 const pages = ["New_Wish", "Pricing", "Blog"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+const settings = ["Profile", "Account", "Dashboard"];
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
@@ -40,6 +43,23 @@ function ResponsiveAppBar() {
     setAnchorElUser(null);
   };
 
+  const router = useRouter();
+  ////////////////ログアウト機能/////////////
+  const handleLogout = async () => {
+    try {
+      await axios.delete("http://localhost:3000/auth/sign_out", {
+        headers: {
+          uid: Cookies.get("uid"),
+          client: Cookies.get("client"),
+          "access-token": Cookies.get("access-token"),
+        },
+      });
+      router.reload();
+    } catch (err) {
+      alert("削除に失敗しました");
+    }
+  };
+  ////////////////ログアウト機能/////////////
   return (
     <>
       <AppBar position="fixed">
@@ -158,6 +178,9 @@ function ResponsiveAppBar() {
                     </Typography>
                   </MenuItem>
                 ))}
+                <MenuItem onClick={handleLogout}>
+                  <Typography sx={{ textAlign: "center" }}>Logout</Typography>
+                </MenuItem>
               </Menu>
             </Box>
           </Toolbar>
