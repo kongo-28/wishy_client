@@ -56,13 +56,16 @@ export const navigationCustomizations: Components<Theme> = {
       }),
     },
   },
+const IconComponent = React.forwardRef<SVGSVGElement, SvgIconProps>((props, ref) => (
+  <UnfoldMoreRoundedIcon fontSize="small" {...props} ref={ref} />
+));
+
+IconComponent.displayName = 'IconComponent';
+
+const themeCustomizations = {
   MuiSelect: {
     defaultProps: {
-      IconComponent: React.forwardRef<SVGSVGElement, SvgIconProps>(
-        (props, ref) => (
-          <UnfoldMoreRoundedIcon fontSize="small" {...props} ref={ref} />
-        )
-      ),
+      IconComponent: IconComponent,
     },
     styleOverrides: {
       root: ({ theme }) => ({
