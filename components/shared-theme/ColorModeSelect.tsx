@@ -13,7 +13,7 @@ export default function ColorModeSelect(props: SelectProps) {
       value={mode}
       onChange={(e) => setMode(e.target.value as "system" | "light" | "dark")}
       SelectDisplayProps={{
-        // @ts-expect-error
+        // @ts-expect-error need to explain
         "data-screenshot": "toggle-mode",
       }}
       {...props}

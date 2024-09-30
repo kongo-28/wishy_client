@@ -394,6 +394,6 @@ export const shape = {
   borderRadius: 8,
 };
 
-// @ts-expect-error
+// @ts-expect-error  need to explain
 const defaultShadows: Shadows = ['var(--mui-palette-baseShadow)', ...defaultTheme.shadows.slice(1)];
 export const shadows = defaultShadows;
