@@ -11,9 +11,15 @@ import LocalFireDepartmentIcon from "@mui/icons-material/LocalFireDepartment";
 import axios from "axios";
 
 const Wish = ({ wish, user }: any) => {
-  const [likes, setLikes] = useState(
-    wish.likes[0].count ? wish.likes[0].count : 0
-  );
+  let like_count = 0;
+
+  if (wish.likes[0]) {
+    like_count = wish.likes[0].count;
+  } else {
+    like_count = 0;
+  }
+
+  const [likes, setLikes] = useState(like_count);
 
   useEffect(() => {
     const handleBeforeUnload = async (event: any) => {
