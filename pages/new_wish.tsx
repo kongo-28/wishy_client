@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -54,8 +54,8 @@ const SignInContainer = styled(Stack)(({ theme }) => ({
 }));
 
 export default function NewWish(props: { disableCustomTheme?: boolean }) {
-  const [titleError, setTitleError] = React.useState(false);
-  const [titleErrorMessage, setTitleErrorMessage] = React.useState("");
+  const [titleError, setTitleError] = useState(false);
+  const [titleErrorMessage, setTitleErrorMessage] = useState("");
   const router = useRouter();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
