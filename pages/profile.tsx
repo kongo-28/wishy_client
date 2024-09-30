@@ -10,6 +10,9 @@ import CardActions from "@mui/material/CardActions";
 import CardHeader from "@mui/material/CardHeader";
 import Avatar from "@mui/material/Avatar";
 import { red } from "@mui/material/colors";
+import Button from "@mui/material/Button";
+import Stack from "@mui/material/Stack";
+import SendIcon from "@mui/icons-material/Send";
 
 export const getServerSideProps: GetServerSideProps =
   withAuthServerSideProps("/users");
@@ -32,6 +35,13 @@ const Profile = (props: any) => {
           総いいね:777 総WISH:77 叶えたWISH:7
         </CardActions>
       </Card>
+      <Stack spacing={2} direction="row">
+        <Button variant="contained">wish候補リスト作成</Button>
+        <Button variant="contained">アクションプラン作成</Button>
+        <Button variant="contained" endIcon={<SendIcon />}>
+          wishリストの共有
+        </Button>
+      </Stack>
       wishリスト
       <div>
         {props.wishes.map((wish: any) => (
