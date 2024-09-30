@@ -13,7 +13,6 @@ import AppTheme from "@/components/shared-theme/AppTheme";
 import ColorModeSelect from "@/components/shared-theme/ColorModeSelect";
 import axios from "axios";
 import { useRouter } from "next/router";
-import Cookies from "js-cookie";
 import ResponsiveAppBar from "@/components/ResponsiveAppBar";
 
 const Card = styled(MuiCard)(({ theme }) => ({
@@ -57,10 +56,6 @@ const SignInContainer = styled(Stack)(({ theme }) => ({
 export default function NewWish(props: { disableCustomTheme?: boolean }) {
   const [titleError, setTitleError] = React.useState(false);
   const [titleErrorMessage, setTitleErrorMessage] = React.useState("");
-  const [open, setOpen] = React.useState(false);
-
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
   const router = useRouter();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -84,7 +79,7 @@ export default function NewWish(props: { disableCustomTheme?: boolean }) {
 
   const validateInputs = () => {
     const title = document.getElementById("title") as HTMLInputElement;
-    const content = document.getElementById("content") as HTMLInputElement;
+    // const content = document.getElementById("content") as HTMLInputElement;
 
     let isValid = true;
 
@@ -144,9 +139,6 @@ export default function NewWish(props: { disableCustomTheme?: boolean }) {
                   variant="outlined"
                   color={titleError ? "error" : "primary"}
                   sx={{ ariaLabel: "title" }}
-                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                    setTitle(e.target.value)
-                  }
                 />
               </FormControl>
               <FormControl>
@@ -164,9 +156,6 @@ export default function NewWish(props: { disableCustomTheme?: boolean }) {
                   fullWidth
                   variant="outlined"
                   // color={contentError ? "error" : "primary"}
-                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                    setContent(e.target.value)
-                  }
                 />
               </FormControl>
 
