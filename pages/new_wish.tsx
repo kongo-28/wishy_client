@@ -66,7 +66,7 @@ export default function NewWish(props: { disableCustomTheme?: boolean }) {
       content: data.get("content"),
     });
     try {
-      await axios.post(`${process.env.EMV_URL}/wishes`, {
+      await axios.post(`${process.env.ENV_URL}/wishes`, {
         title: data.get("title"),
         content: data.get("content"),
       });
