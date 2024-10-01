@@ -57,7 +57,10 @@ const SignInContainer = styled(Stack)(({ theme }) => ({
   },
 }));
 
-export default function SignIn(props: { disableCustomTheme?: boolean }) {
+export default function SignIn(props: {
+  disableCustomTheme?: boolean;
+  domain: string;
+}) {
   const [emailError, setEmailError] = useState(false);
   const [emailErrorMessage, setEmailErrorMessage] = useState("");
   const [passwordError, setPasswordError] = useState(false);
@@ -84,7 +87,7 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
       password: data.get("password"),
     });
     const axiosInstance = axios.create({
-      baseURL: `${process.env.ENV_URL}`,
+      baseURL: `${props.domain}`,
       headers: {
         "content-type": "application/json",
       },
