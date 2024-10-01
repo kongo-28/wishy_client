@@ -1,11 +1,21 @@
 import SignUp from "@/components/sign-in/SignUp";
 import ResponsiveAppBar from "@/components/ResponsiveAppBar";
+import { GetServerSideProps } from "next";
 
-const signUp = () => {
+export const getServerSideProps: GetServerSideProps = async () => {
+  const domain: string = process.env.DOMAIN_NAME!;
+  return {
+    props: {
+      domain,
+    },
+  };
+};
+
+const signUp = (props: { disableCustomTheme?: boolean; domain: string }) => {
   return (
     <div>
       <ResponsiveAppBar />
-      <SignUp />
+      <SignUp domain={props.domain} />
     </div>
   );
 };
