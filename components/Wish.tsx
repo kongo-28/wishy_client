@@ -9,6 +9,7 @@ import ShareIcon from "@mui/icons-material/Share";
 import { pink } from "@mui/material/colors";
 import LocalFireDepartmentIcon from "@mui/icons-material/LocalFireDepartment";
 import axios from "axios";
+import Container from "@mui/material/Container";
 
 const Wish = ({ wish, user }: any) => {
   let like_count = 0;
@@ -45,34 +46,41 @@ const Wish = ({ wish, user }: any) => {
 
   return (
     <div>
-      <Card variant="outlined" sx={{ minWidth: 600 }}>
-        <CardHeader
-          title={wish.title}
-          subheader={wish.updated_at.slice(0, 16)}
-        />
-        <CardContent>
-          {" "}
-          <p>{wish.content}</p>
-        </CardContent>
-        <CardActions disableSpacing>
-          <IconButton
-            aria-label="add to favorites"
-            onClick={() => setLikes(likes + 1)}
-          >
-            <FavoriteIcon />
-            {likes}
-          </IconButton>
-          <IconButton
-            aria-label="add to favorites"
-            onClick={() => setLikes(likes + 9)}
-          >
-            <LocalFireDepartmentIcon sx={{ fontSize: 50, color: pink[500] }} />
-          </IconButton>
-          <IconButton aria-label="share" onClick={() => setLikes(likes + 100)}>
-            <ShareIcon />
-          </IconButton>
-        </CardActions>
-      </Card>
+      <Container disableGutters>
+        <Card variant="outlined" sx={{ minWidth: 600 }}>
+          <CardHeader
+            title={wish.title}
+            subheader={wish.updated_at.slice(0, 16)}
+          />
+          <CardContent>
+            {" "}
+            <p>{wish.content}</p>
+          </CardContent>
+          <CardActions disableSpacing>
+            <IconButton
+              aria-label="add to favorites"
+              onClick={() => setLikes(likes + 1)}
+            >
+              <FavoriteIcon />
+              {likes}
+            </IconButton>
+            <IconButton
+              aria-label="add to favorites"
+              onClick={() => setLikes(likes + 9)}
+            >
+              <LocalFireDepartmentIcon
+                sx={{ fontSize: 50, color: pink[500] }}
+              />
+            </IconButton>
+            <IconButton
+              aria-label="share"
+              onClick={() => setLikes(likes + 100)}
+            >
+              <ShareIcon />
+            </IconButton>
+          </CardActions>
+        </Card>
+      </Container>
     </div>
   );
 };
