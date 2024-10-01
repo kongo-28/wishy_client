@@ -84,7 +84,7 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
       password: data.get("password"),
     });
     const axiosInstance = axios.create({
-      baseURL: `http://localhost:3000/`,
+      baseURL: `${process.env.EMV_URL}`,
       headers: {
         "content-type": "application/json",
       },
@@ -93,7 +93,7 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
       setIsError(false);
       setErrorMessage("");
       return await axiosInstance
-        .post("auth/sign_in", {
+        .post("/auth/sign_in", {
           email: data.get("email"),
           password: data.get("password"),
         })
