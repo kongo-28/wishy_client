@@ -2,6 +2,7 @@ import { GetServerSideProps } from "next";
 
 export const withAuthServerSideProps = (url: string): GetServerSideProps => {
   return async (context) => {
+    const domain = process.env.DOMAIN_NAME;
     const { req, res } = context;
 
     const uid = req.cookies?.["uid"] || "";
@@ -15,7 +16,7 @@ export const withAuthServerSideProps = (url: string): GetServerSideProps => {
       "access-token": accessToken,
     });
 
-    const response = await fetch(`http://localhost:3000${url}`, {
+    const response = await fetch(`${domain}${url}`, {
       headers: headers,
     });
     if (!response.ok && response.status === 401) {
