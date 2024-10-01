@@ -2,7 +2,7 @@ import { GetServerSideProps } from "next";
 
 export const withAuthServerSideProps = (url: string): GetServerSideProps => {
   return async (context) => {
-    const domain = process.env.DOMAIN_NAME;
+    const domain: string = process.env.DOMAIN_NAME!;
     const { req, res } = context;
 
     const uid = req.cookies?.["uid"] || "";

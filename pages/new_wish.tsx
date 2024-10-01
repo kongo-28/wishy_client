@@ -14,6 +14,16 @@ import ColorModeSelect from "@/components/shared-theme/ColorModeSelect";
 import axios from "axios";
 import { useRouter } from "next/router";
 import ResponsiveAppBar from "@/components/ResponsiveAppBar";
+import { GetServerSideProps } from "next";
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  const domain: string = process.env.DOMAIN_NAME!;
+  return {
+    props: {
+      domain,
+    },
+  };
+};
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: "flex",
@@ -53,7 +63,10 @@ const SignInContainer = styled(Stack)(({ theme }) => ({
   },
 }));
 
-export default function NewWish(props: { disableCustomTheme?: boolean }) {
+export default function NewWish(props: {
+  disableCustomTheme?: boolean;
+  domain: string;
+}) {
   const [titleError, setTitleError] = useState(false);
   const [titleErrorMessage, setTitleErrorMessage] = useState("");
   const router = useRouter();
@@ -66,7 +79,7 @@ export default function NewWish(props: { disableCustomTheme?: boolean }) {
       content: data.get("content"),
     });
     try {
-      await axios.post(`${process.env.ENV_URL}/wishes`, {
+      await axios.post(`${props.domain}/wishes`, {
         title: data.get("title"),
         content: data.get("content"),
       });
