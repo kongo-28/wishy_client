@@ -49,7 +49,7 @@ const Wish = ({ wish, user }: any) => {
     <div>
       <Container maxWidth="xl">
         <Paper>
-          <Card variant="outlined" sx={{ minWidth: 600 }}>
+          <Card variant="outlined" sx={{ minWidth: 500 }}>
             <CardHeader
               title={wish.title}
               subheader={wish.updated_at.slice(0, 16)}
