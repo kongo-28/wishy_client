@@ -20,7 +20,7 @@ import axios from "axios";
 const pages = ["New_Wish", "Pricing", "Blog"];
 const settings = ["Profile", "Account", "Dashboard"];
 
-function ResponsiveAppBar() {
+function ResponsiveAppBar({ domain }: any) {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
@@ -47,7 +47,7 @@ function ResponsiveAppBar() {
   ////////////////ログアウト機能/////////////
   const handleLogout = async () => {
     try {
-      await axios.delete("http://localhost:3000/auth/sign_out", {
+      await axios.delete(`${domain}/auth/sign_out`, {
         headers: {
           uid: Cookies.get("uid"),
           client: Cookies.get("client"),
@@ -56,7 +56,7 @@ function ResponsiveAppBar() {
       });
       router.reload();
     } catch (err) {
-      alert("削除に失敗しました");
+      alert("ログアウトに失敗しました");
     }
   };
   ////////////////ログアウト機能/////////////

@@ -110,7 +110,7 @@ export default function NewWish(props: {
 
   return (
     <div>
-      <ResponsiveAppBar />
+      <ResponsiveAppBar domain={props.domain} />
       <AppTheme {...props}>
         <CssBaseline enableColorScheme />
         <SignInContainer direction="column" justifyContent="space-between">

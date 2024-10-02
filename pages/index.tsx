@@ -12,7 +12,7 @@ export const getServerSideProps: GetServerSideProps =
 const Home = (props: any) => {
   return (
     <div className={styles.main}>
-      <ResponsiveAppBar />
+      <ResponsiveAppBar domain={props.domain} />
       {props.user && (
         // ユーザーがいる場合に表示させるコンポーネント
         <div>{props.user.email}でログイン中</div>
@@ -20,7 +20,11 @@ const Home = (props: any) => {
       {!props.user && (
         // ユーザーがいない場合に表示させるコンポーネント
         <div>
-          未ログインです
+          <p>
+            未ログインです
+            <br />
+            いいねは保存されません
+          </p>
           <div>
             <Link href="/signin">signin</Link>
           </div>

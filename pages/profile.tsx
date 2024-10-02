@@ -20,7 +20,7 @@ export const getServerSideProps: GetServerSideProps =
 const Profile = (props: any) => {
   return (
     <div className={styles.main}>
-      <ResponsiveAppBar />
+      <ResponsiveAppBar domain={props.domain} />
       <div className={styles.wishcontainer}>
         <Card variant="outlined" sx={{ minWidth: 600 }}>
           <CardHeader
