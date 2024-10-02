@@ -13,6 +13,8 @@ import { red } from "@mui/material/colors";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import SendIcon from "@mui/icons-material/Send";
+import Container from "@mui/material/Container";
+import { Divider, Paper } from "@mui/material";
 
 export const getServerSideProps: GetServerSideProps =
   withAuthServerSideProps("/users");
@@ -22,29 +24,40 @@ const Profile = (props: any) => {
     <div className={styles.main}>
       <ResponsiveAppBar domain={props.domain} />
       <div className={styles.wishcontainer}>
-        <Card variant="outlined" sx={{ minWidth: 600 }}>
-          <CardHeader
-            avatar={
-              <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-                {props.user.email.slice(0, 1)}
-              </Avatar>
-            }
-            title={props.user.email}
-          />
-          <CardContent> 叶えたいこととかやりたいことの方針的なこと</CardContent>
-          <CardActions disableSpacing>
-            総いいね:777 総WISH:77 叶えたWISH:7
-          </CardActions>
-        </Card>
-        <Stack spacing={2} direction="row">
-          <Button variant="contained">wish候補リスト作成</Button>
-          <Button variant="contained">アクションプラン作成</Button>
-          <Button variant="contained" endIcon={<SendIcon />}>
-            wishリストの共有
-          </Button>
-        </Stack>
-        wishリスト
+        <Container maxWidth="md">
+          <Paper>
+            <Card variant="outlined" sx={{ minWidth: 300 }}>
+              <CardHeader
+                avatar={
+                  <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+                    {props.user.email.slice(0, 1)}
+                  </Avatar>
+                }
+                title={props.user.email}
+              />
+              <CardContent>
+                {" "}
+                叶えたいこととかやりたいことの方針的なこと
+              </CardContent>
+              <CardActions disableSpacing>
+                総いいね:777 総WISH:77 叶えたWISH:7
+              </CardActions>
+            </Card>
+            <Stack
+              spacing={2}
+              direction="row"
+              // divider={<Divider orientation="vertical" flexItem />}
+            >
+              <Button variant="contained">wish候補リスト作成</Button>
+              <Button variant="contained">アクションプラン作成</Button>
+              <Button variant="contained" endIcon={<SendIcon />}>
+                wishリストの共有
+              </Button>
+            </Stack>
+          </Paper>
+        </Container>
       </div>
+      <div>wishリスト</div>
       <div className={styles.wishcontainer}>
         {props.wishes.map((wish: any) => (
           <div key={wish.id} className={styles.postCard}>

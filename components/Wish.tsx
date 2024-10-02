@@ -49,7 +49,7 @@ const Wish = ({ wish, user, domain }: any) => {
 
   return (
     <div>
-      <Container maxWidth="xl">
+      <Container maxWidth="md">
         <Paper>
           <Card variant="outlined" sx={{ minWidth: 300 }}>
             <CardHeader
