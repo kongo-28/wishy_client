@@ -15,10 +15,12 @@ import { Paper } from "@mui/material";
 const Wish = ({ wish, user, domain }: any) => {
   let like_count = 0;
 
-  if (wish.likes[0]) {
-    like_count = wish.likes[0].count;
-  } else {
-    like_count = 0;
+  if (wish.likes) {
+    if (wish.likes[0]) {
+      like_count = wish.likes[0].count;
+    } else {
+      like_count = 0;
+    }
   }
 
   const [likes, setLikes] = useState(like_count);
@@ -43,7 +45,7 @@ const Wish = ({ wish, user, domain }: any) => {
     return () => {
       window.removeEventListener("beforeunload", handleBeforeUnload);
     };
-  }, [likes, user.id]);
+  }, [likes]);
 
   return (
     <div>
