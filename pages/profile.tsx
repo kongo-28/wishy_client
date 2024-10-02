@@ -21,29 +21,31 @@ const Profile = (props: any) => {
   return (
     <div className={styles.main}>
       <ResponsiveAppBar />
-      <Card variant="outlined" sx={{ minWidth: 600 }}>
-        <CardHeader
-          avatar={
-            <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-              {props.user.email.slice(0, 1)}
-            </Avatar>
-          }
-          title={props.user.email}
-        />
-        <CardContent> 叶えたいこととかやりたいことの方針的なこと</CardContent>
-        <CardActions disableSpacing>
-          総いいね:777 総WISH:77 叶えたWISH:7
-        </CardActions>
-      </Card>
-      <Stack spacing={2} direction="row">
-        <Button variant="contained">wish候補リスト作成</Button>
-        <Button variant="contained">アクションプラン作成</Button>
-        <Button variant="contained" endIcon={<SendIcon />}>
-          wishリストの共有
-        </Button>
-      </Stack>
-      wishリスト
-      <div>
+      <div className={styles.wishcontainer}>
+        <Card variant="outlined" sx={{ minWidth: 600 }}>
+          <CardHeader
+            avatar={
+              <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+                {props.user.email.slice(0, 1)}
+              </Avatar>
+            }
+            title={props.user.email}
+          />
+          <CardContent> 叶えたいこととかやりたいことの方針的なこと</CardContent>
+          <CardActions disableSpacing>
+            総いいね:777 総WISH:77 叶えたWISH:7
+          </CardActions>
+        </Card>
+        <Stack spacing={2} direction="row">
+          <Button variant="contained">wish候補リスト作成</Button>
+          <Button variant="contained">アクションプラン作成</Button>
+          <Button variant="contained" endIcon={<SendIcon />}>
+            wishリストの共有
+          </Button>
+        </Stack>
+        wishリスト
+      </div>
+      <div className={styles.wishcontainer}>
         {props.wishes.map((wish: any) => (
           <div key={wish.id} className={styles.postCard}>
             <Wish wish={wish} user={props.user}></Wish>
