@@ -48,7 +48,7 @@ const Profile = (props: any) => {
       <div className={styles.wishcontainer}>
         {props.wishes.map((wish: any) => (
           <div key={wish.id} className={styles.postCard}>
-            <Wish wish={wish} user={props.user}></Wish>
+            <Wish wish={wish} user={props.user} domain={props.domain}></Wish>
           </div>
         ))}
       </div>

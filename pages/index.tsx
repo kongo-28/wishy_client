@@ -22,10 +22,10 @@ const Home = (props: any) => {
         <div>
           未ログインです
           <div>
-            <Link href="http://localhost:3001/signin">signin</Link>
+            <Link href="/signin">signin</Link>
           </div>
           <div>
-            <Link href="http://localhost:3001/signup">signup</Link>
+            <Link href="/signup">signup</Link>
           </div>
         </div>
       )}
@@ -33,7 +33,7 @@ const Home = (props: any) => {
       <div className={styles.wishcontainer}>
         {props.wishes.map((wish: any) => (
           <div key={wish.id} className={styles.postCard}>
-            <Wish wish={wish} user={props.user}></Wish>
+            <Wish wish={wish} user={props.user} domain={props.domain}></Wish>
           </div>
         ))}
       </div>

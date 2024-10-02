@@ -12,7 +12,7 @@ import axios from "axios";
 import Container from "@mui/material/Container";
 import { Paper } from "@mui/material";
 
-const Wish = ({ wish, user }: any) => {
+const Wish = ({ wish, user, domain }: any) => {
   let like_count = 0;
 
   if (wish.likes[0]) {
@@ -27,7 +27,7 @@ const Wish = ({ wish, user }: any) => {
     const handleBeforeUnload = async (event: any) => {
       event.preventDefault();
       try {
-        await axios.post("http://localhost:3000/likes", {
+        await axios.post(`${domain}/likes`, {
           user_id: user.id,
           wish_id: wish.id,
           count: likes,
