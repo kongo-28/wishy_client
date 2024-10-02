@@ -17,8 +17,14 @@ import { useRouter } from "next/router";
 import Cookies from "js-cookie";
 import axios from "axios";
 
-const pages = ["New_Wish", "Pricing", "Blog"];
-const settings = ["Profile", "Account", "Dashboard"];
+const pages = [
+  "New_Wish",
+  // , "Pricing", "Blog"
+];
+const settings = [
+  "Profile",
+  // , "Account", "Dashboard"
+];
 
 function ResponsiveAppBar({ domain }: any) {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(

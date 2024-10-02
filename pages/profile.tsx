@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "@/styles/Home.module.css";
 import { GetServerSideProps } from "next";
 import { withAuthServerSideProps } from "@/lib/auth";
@@ -14,12 +14,23 @@ import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import SendIcon from "@mui/icons-material/Send";
 import Container from "@mui/material/Container";
-import { Divider, Paper } from "@mui/material";
+import { Paper } from "@mui/material";
+import ActionPlan from "@/components/ActionPlan";
 
 export const getServerSideProps: GetServerSideProps =
   withAuthServerSideProps("/users");
 
 const Profile = (props: any) => {
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
     <div className={styles.main}>
       <ResponsiveAppBar domain={props.domain} />
@@ -43,13 +54,11 @@ const Profile = (props: any) => {
                 総いいね:777 総WISH:77 叶えたWISH:7
               </CardActions>
             </Card>
-            <Stack
-              spacing={2}
-              direction="row"
-              // divider={<Divider orientation="vertical" flexItem />}
-            >
+            <Stack spacing={2} direction="row">
               <Button variant="contained">wish候補リスト作成</Button>
-              <Button variant="contained">アクションプラン作成</Button>
+              <Button variant="contained" onClick={handleClickOpen}>
+                アクションプラン作成
+              </Button>
               <Button variant="contained" endIcon={<SendIcon />}>
                 wishリストの共有
               </Button>
@@ -57,6 +66,7 @@ const Profile = (props: any) => {
           </Paper>
         </Container>
       </div>
+      <ActionPlan open={open} handleClose={handleClose} />
       <div>wishリスト</div>
       <div className={styles.wishcontainer}>
         {props.wishes.map((wish: any) => (
