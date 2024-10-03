@@ -1,15 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { GetServerSideProps } from "next";
 import { withAuthServerSideProps } from "@/lib/auth";
 import ResponsiveAppBar from "@/components/ResponsiveAppBar";
 import styles from "@/styles/Home.module.css";
 import Wish from "@/components/Wish";
+import Box from "@mui/material/Box";
+import Fab from "@mui/material/Fab";
+import AddIcon from "@mui/icons-material/Add";
+import NewWish from "@/components/NewWish";
 
 export const getServerSideProps: GetServerSideProps =
   withAuthServerSideProps("/wishes");
 
 const Home = (props: any) => {
+  const [open, setOpen] = useState(false);
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
   return (
     <div className={styles.main}>
       <ResponsiveAppBar domain={props.domain} />
@@ -33,6 +44,18 @@ const Home = (props: any) => {
           </div>
         </div>
       )}
+      <NewWish open={open} handleClose={handleClose} props={props} />
+
+      <Box
+        position="fixed"
+        bottom="20px"
+        right="20px"
+        sx={{ "& > :not(style)": { m: 1 } }}
+      >
+        <Fab onClick={handleClickOpen} color="primary" aria-label="add">
+          <AddIcon />
+        </Fab>
+      </Box>
 
       <div className={styles.wishcontainer}>
         {props.wishes.map((wish: any) => (
