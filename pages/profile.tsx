@@ -16,6 +16,7 @@ import SendIcon from "@mui/icons-material/Send";
 import Container from "@mui/material/Container";
 import { Paper } from "@mui/material";
 import ActionPlan from "@/components/ActionPlan";
+import Link from "next/link";
 
 export const getServerSideProps: GetServerSideProps =
   withAuthServerSideProps("/users");
@@ -55,7 +56,9 @@ const Profile = (props: any) => {
               </CardActions>
             </Card>
             <Stack spacing={2} direction="row">
-              <Button variant="contained">wish候補リスト作成</Button>
+              <Button variant="contained">
+                <Link href="/candidate">wish候補提案</Link>
+              </Button>
               <Button variant="contained" onClick={handleClickOpen}>
                 アクションプラン作成
               </Button>
