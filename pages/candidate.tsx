@@ -12,7 +12,7 @@ import AddIcon from "@mui/icons-material/Add";
 import NewWish from "@/components/NewWish";
 
 export const getServerSideProps: GetServerSideProps =
-  withAuthServerSideProps("/users/action");
+  withAuthServerSideProps("/users/candidate");
 
 const Candidate = (props: any) => {
   const [open, setOpen] = useState(false);
@@ -43,7 +43,7 @@ const Candidate = (props: any) => {
         <Container maxWidth="md">
           <Paper>
             <Card variant="outlined" sx={{ minWidth: 300 }}>
-              <div className={styles.postCard}>{props.action_plan}</div>
+              <div className={styles.postCard}>{props.candidate}</div>
             </Card>
           </Paper>
         </Container>
