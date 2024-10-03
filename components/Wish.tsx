@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
@@ -11,6 +11,7 @@ import LocalFireDepartmentIcon from "@mui/icons-material/LocalFireDepartment";
 import axios from "axios";
 import Container from "@mui/material/Container";
 import { Paper } from "@mui/material";
+import { useDebouncedCallback } from "use-debounce";
 
 const Wish = ({ wish, user, domain }: any) => {
   let like_count = 0;
@@ -25,27 +26,24 @@ const Wish = ({ wish, user, domain }: any) => {
 
   const [likes, setLikes] = useState(like_count);
 
-  useEffect(() => {
-    const handleBeforeUnload = async (event: any) => {
-      event.preventDefault();
-      try {
-        await axios.post(`${domain}/likes`, {
-          user_id: user.id,
-          wish_id: wish.id,
-          count: likes,
-        });
-      } catch (error) {
-        console.error("Failed to save likes on unload:", error);
-      }
-    };
+  const handleClickLikes = async () => {
+    try {
+      await axios.post(`${domain}/likes`, {
+        user_id: user.id,
+        wish_id: wish.id,
+        count: likes,
+      });
+    } catch (error) {
+      console.error("Failed to save likes on unload:", error);
+    }
+  };
 
-    window.addEventListener("beforeunload", handleBeforeUnload);
-
-    // クリーンアップ関数でイベントリスナーを解除
-    return () => {
-      window.removeEventListener("beforeunload", handleBeforeUnload);
-    };
-  }, [likes]);
+  const debouncedHandleClickLikes = useDebouncedCallback(
+    // function
+    handleClickLikes,
+    // delay in ms
+    500
+  );
 
   return (
     <div>
@@ -63,14 +61,20 @@ const Wish = ({ wish, user, domain }: any) => {
             <CardActions disableSpacing>
               <IconButton
                 aria-label="add to favorites"
-                onClick={() => setLikes(likes + 1)}
+                onClick={() => {
+                  setLikes(likes + 1);
+                  debouncedHandleClickLikes();
+                }}
               >
                 <FavoriteIcon />
                 {likes}
               </IconButton>
               <IconButton
                 aria-label="add to favorites"
-                onClick={() => setLikes(likes + 9)}
+                onClick={() => {
+                  setLikes(likes + 9);
+                  debouncedHandleClickLikes();
+                }}
               >
                 <LocalFireDepartmentIcon
                   sx={{ fontSize: 50, color: pink[500] }}
@@ -78,7 +82,10 @@ const Wish = ({ wish, user, domain }: any) => {
               </IconButton>
               <IconButton
                 aria-label="share"
-                onClick={() => setLikes(likes + 100)}
+                onClick={() => {
+                  setLikes(likes + 100);
+                  debouncedHandleClickLikes();
+                }}
               >
                 <ShareIcon />
               </IconButton>
