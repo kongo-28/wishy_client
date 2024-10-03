@@ -10,6 +10,7 @@ import Box from "@mui/material/Box";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
 import NewWish from "@/components/NewWish";
+import Footer from "@/components/Footer";
 
 export const getServerSideProps: GetServerSideProps =
   withAuthServerSideProps("/users/candidate");
@@ -48,6 +49,7 @@ const Candidate = (props: any) => {
           </Paper>
         </Container>
       </div>
+      <Footer></Footer>
     </div>
   );
 };

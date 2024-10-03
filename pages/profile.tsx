@@ -17,6 +17,7 @@ import Container from "@mui/material/Container";
 import { Paper } from "@mui/material";
 import ActionPlan from "@/components/ActionPlan";
 import Link from "next/link";
+import Footer from "@/components/Footer";
 
 export const getServerSideProps: GetServerSideProps =
   withAuthServerSideProps("/users");
@@ -78,6 +79,7 @@ const Profile = (props: any) => {
           </div>
         ))}
       </div>
+      <Footer></Footer>
     </div>
   );
 };

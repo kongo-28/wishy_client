@@ -9,6 +9,7 @@ import Box from "@mui/material/Box";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
 import NewWish from "@/components/NewWish";
+import Footer from "@/components/Footer";
 
 export const getServerSideProps: GetServerSideProps =
   withAuthServerSideProps("/wishes");
@@ -64,6 +65,8 @@ const Home = (props: any) => {
           </div>
         ))}
       </div>
+
+      <Footer></Footer>
     </div>
   );
 };

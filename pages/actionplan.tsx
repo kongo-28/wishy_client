@@ -6,6 +6,7 @@ import styles from "@/styles/Home.module.css";
 import Card from "@mui/material/Card";
 import Container from "@mui/material/Container";
 import { Paper } from "@mui/material";
+import Footer from "@/components/Footer";
 
 export const getServerSideProps: GetServerSideProps =
   withAuthServerSideProps("/users/action");
@@ -24,6 +25,7 @@ const Home = (props: any) => {
           </Paper>
         </Container>
       </div>
+      <Footer></Footer>
     </div>
   );
 };
