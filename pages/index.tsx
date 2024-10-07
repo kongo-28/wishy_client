@@ -23,6 +23,7 @@ import CardHeader from "@mui/material/CardHeader";
 import Avatar from "@mui/material/Avatar";
 import { red } from "@mui/material/colors";
 import { Paper } from "@mui/material";
+import Profile from "@/components/Profile";
 
 export const getServerSideProps: GetServerSideProps =
   withAuthServerSideProps("/wishes");
@@ -88,40 +89,7 @@ const Home = (props: any) => {
         </Fab>
       </Box>
       {props.user && (
-        <div className={styles.wishcontainer}>
-          <Container maxWidth="md">
-            <Paper>
-              <Card variant="outlined" sx={{ minWidth: 300 }}>
-                <CardHeader
-                  avatar={
-                    <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-                      {props.user.email.slice(0, 1)}
-                    </Avatar>
-                  }
-                  title={props.user.email}
-                />
-                <CardContent>
-                  {" "}
-                  叶えたいこととかやりたいことの方針的なこと
-                </CardContent>
-                <CardActions disableSpacing>
-                  総いいね:777 総WISH:77 叶えたWISH:7
-                </CardActions>
-              </Card>
-              <Stack spacing={2} direction="row">
-                <Button variant="contained">
-                  <Link href="/candidate">wish候補提案</Link>
-                </Button>
-                <Button variant="contained" onClick={handleClickOpen}>
-                  アクションプラン作成
-                </Button>
-                <Button variant="contained" endIcon={<SendIcon />}>
-                  wishリストの共有
-                </Button>
-              </Stack>
-            </Paper>
-          </Container>
-        </div>
+        <Profile user={props.user} handleClickOpen={handleClickOpen}></Profile>
       )}
 
       <div className={styles.wishcontainer}>
