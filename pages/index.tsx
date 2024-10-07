@@ -41,7 +41,11 @@ const Home = (props: any) => {
         </Fab>
       </Box>
       {props.user && (
-        <Profile user={props.user} handleClickOpen={handleClickOpen}></Profile>
+        <Profile
+          user={props.user}
+          wishes_user={props.wishes_user}
+          handleClickOpen={handleClickOpen}
+        ></Profile>
       )}
 
       <WishList
