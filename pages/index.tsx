@@ -13,16 +13,6 @@ import Footer from "@/components/Footer";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Button from "@mui/material/Button";
-import Stack from "@mui/material/Stack";
-import SendIcon from "@mui/icons-material/Send";
-import Container from "@mui/material/Container";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardActions from "@mui/material/CardActions";
-import CardHeader from "@mui/material/CardHeader";
-import Avatar from "@mui/material/Avatar";
-import { red } from "@mui/material/colors";
-import { Paper } from "@mui/material";
 import Profile from "@/components/Profile";
 
 export const getServerSideProps: GetServerSideProps =
