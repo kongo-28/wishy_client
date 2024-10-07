@@ -18,11 +18,12 @@ import Cookies from "js-cookie";
 import axios from "axios";
 
 const pages = [
-  "New_Wish",
+  "---",
+  // "New_Wish",
   // , "Pricing", "Blog"
 ];
 const settings = [
-  "Profile",
+  "---",
   // , "Account", "Dashboard"
 ];
 
@@ -119,8 +120,8 @@ function ResponsiveAppBar({ domain }: any) {
               >
                 {pages.map((page) => (
                   <MenuItem key={page} onClick={handleCloseNavMenu}>
-                    {/* <Typography sx={{ textAlign: "center" }}>{page}</Typography> */}
-                    <Link href={`/${page.toLowerCase()}`}>{page}</Link>
+                    <Typography sx={{ textAlign: "center" }}>{page}</Typography>
+                    {/* <Link href={`/${page.toLowerCase()}`}>{page}</Link> */}
                   </MenuItem>
                 ))}
               </Menu>
@@ -147,7 +148,7 @@ function ResponsiveAppBar({ domain }: any) {
               {pages.map((page) => (
                 <Button
                   key={page}
-                  href={`/${page.toLowerCase()}`}
+                  // href={`/${page.toLowerCase()}`}
                   onClick={handleCloseNavMenu}
                   sx={{ my: 2, color: "white", display: "block" }}
                 >
@@ -180,7 +181,8 @@ function ResponsiveAppBar({ domain }: any) {
                 {settings.map((setting) => (
                   <MenuItem key={setting} onClick={handleCloseUserMenu}>
                     <Typography sx={{ textAlign: "center" }}>
-                      <Link href={`/${setting.toLowerCase()}`}>{setting}</Link>
+                      {setting}
+                      {/* <Link href={`/${setting.toLowerCase()}`}>{setting}</Link> */}
                     </Typography>
                   </MenuItem>
                 ))}
