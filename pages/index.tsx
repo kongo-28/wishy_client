@@ -163,10 +163,7 @@ const Home = (props: any) => {
             ))}
           </CustomTabPanel>
           <CustomTabPanel value={value} index={1}>
-            Item Two
-          </CustomTabPanel>
-          <CustomTabPanel value={value} index={2}>
-            {props.wishes.map((wish: any) => (
+            {props.wishes_user.map((wish: any) => (
               <div key={wish.id} className={styles.postCard}>
                 <Wish
                   wish={wish}
@@ -175,6 +172,9 @@ const Home = (props: any) => {
                 ></Wish>
               </div>
             ))}
+          </CustomTabPanel>
+          <CustomTabPanel value={value} index={2}>
+            Coming soon...
           </CustomTabPanel>
         </Box>
       </div>
