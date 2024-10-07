@@ -47,15 +47,17 @@ const WishList = (props: any) => {
     <div className={styles.wishcontainer}>
       <Box sx={{ width: "100%" }}>
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-          <Tabs
-            value={value}
-            onChange={handleChange}
-            aria-label="basic tabs example"
-          >
-            <Tab label="ALL WISH" {...a11yProps(0)} />
-            <Tab label="MY WISH" {...a11yProps(1)} />
-            <Tab label="Coming soon..." {...a11yProps(2)} />
-          </Tabs>
+          <div className={styles.wishTabs}>
+            <Tabs
+              value={value}
+              onChange={handleChange}
+              aria-label="basic tabs example"
+            >
+              <Tab label="ALL WISH" {...a11yProps(0)} />
+              <Tab label="MY WISH" {...a11yProps(1)} />
+              <Tab label="Coming soon..." {...a11yProps(2)} />
+            </Tabs>
+          </div>
         </Box>
         <CustomTabPanel value={value} index={0}>
           {props.wishes.map((wish: any) => (
