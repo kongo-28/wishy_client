@@ -65,7 +65,7 @@ const Home = (props: any) => {
     };
   }
 
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(1);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -75,22 +75,6 @@ const Home = (props: any) => {
     <div className={styles.main}>
       <ResponsiveAppBar domain={props.domain} />
 
-      {!props.user && (
-        // ユーザーがいない場合に表示させるコンポーネント
-        <div>
-          <p>
-            未ログインです
-            <br />
-            いいねは保存されません
-          </p>
-          <div>
-            <Link href="/signin">signin</Link>
-          </div>
-          <div>
-            <Link href="/signup">signup</Link>
-          </div>
-        </div>
-      )}
       <NewWish open={open} handleClose={handleClose} props={props} />
 
       <Box
@@ -103,41 +87,43 @@ const Home = (props: any) => {
           <AddIcon />
         </Fab>
       </Box>
+      {props.user && (
+        <div className={styles.wishcontainer}>
+          <Container maxWidth="md">
+            <Paper>
+              <Card variant="outlined" sx={{ minWidth: 300 }}>
+                <CardHeader
+                  avatar={
+                    <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+                      {props.user.email.slice(0, 1)}
+                    </Avatar>
+                  }
+                  title={props.user.email}
+                />
+                <CardContent>
+                  {" "}
+                  叶えたいこととかやりたいことの方針的なこと
+                </CardContent>
+                <CardActions disableSpacing>
+                  総いいね:777 総WISH:77 叶えたWISH:7
+                </CardActions>
+              </Card>
+              <Stack spacing={2} direction="row">
+                <Button variant="contained">
+                  <Link href="/candidate">wish候補提案</Link>
+                </Button>
+                <Button variant="contained" onClick={handleClickOpen}>
+                  アクションプラン作成
+                </Button>
+                <Button variant="contained" endIcon={<SendIcon />}>
+                  wishリストの共有
+                </Button>
+              </Stack>
+            </Paper>
+          </Container>
+        </div>
+      )}
 
-      <div className={styles.wishcontainer}>
-        <Container maxWidth="md">
-          <Paper>
-            <Card variant="outlined" sx={{ minWidth: 300 }}>
-              <CardHeader
-                avatar={
-                  <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-                    {props.user.email.slice(0, 1)}
-                  </Avatar>
-                }
-                title={props.user.email}
-              />
-              <CardContent>
-                {" "}
-                叶えたいこととかやりたいことの方針的なこと
-              </CardContent>
-              <CardActions disableSpacing>
-                総いいね:777 総WISH:77 叶えたWISH:7
-              </CardActions>
-            </Card>
-            <Stack spacing={2} direction="row">
-              <Button variant="contained">
-                <Link href="/candidate">wish候補提案</Link>
-              </Button>
-              <Button variant="contained" onClick={handleClickOpen}>
-                アクションプラン作成
-              </Button>
-              <Button variant="contained" endIcon={<SendIcon />}>
-                wishリストの共有
-              </Button>
-            </Stack>
-          </Paper>
-        </Container>
-      </div>
       <div className={styles.wishcontainer}>
         <Box sx={{ width: "100%" }}>
           <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
@@ -162,16 +148,36 @@ const Home = (props: any) => {
               </div>
             ))}
           </CustomTabPanel>
+          {props.user && (
+            <CustomTabPanel value={value} index={1}>
+              {props.wishes_user.map((wish: any) => (
+                <div key={wish.id} className={styles.postCard}>
+                  <Wish
+                    wish={wish}
+                    user={props.user}
+                    domain={props.domain}
+                  ></Wish>
+                </div>
+              ))}
+            </CustomTabPanel>
+          )}
           <CustomTabPanel value={value} index={1}>
-            {props.wishes_user.map((wish: any) => (
-              <div key={wish.id} className={styles.postCard}>
-                <Wish
-                  wish={wish}
-                  user={props.user}
-                  domain={props.domain}
-                ></Wish>
-              </div>
-            ))}
+            {/* // ユーザーがいない場合に表示させるパネル*/}
+            <div>
+              <p>
+                ログインしてへんで！
+                <br />
+                いいねが保存されへんからログインかアカウント作るか
+                <br />
+                どっちかしてや！
+              </p>
+              <Button variant="contained">
+                <Link href="/signin">signin</Link>
+              </Button>
+              <Button variant="contained">
+                <Link href="/signup">signup</Link>
+              </Button>
+            </div>
           </CustomTabPanel>
           <CustomTabPanel value={value} index={2}>
             Coming soon...
