@@ -11,25 +11,43 @@ import Profile from "@/components/Profile";
 import WishList from "@/components/WishList";
 import { Container } from "@mui/material";
 import Tooltip from "@mui/material/Tooltip";
+import ActionPlan from "@/components/ActionPlan";
 
 export const getServerSideProps: GetServerSideProps =
   withAuthServerSideProps("/wishes");
 
 const Home = (props: any) => {
+  /////////////// NEW WISH////////////////
   const [open, setOpen] = useState(false);
 
-  const handleClickOpen = () => {
+  const handleClickOpenNew = () => {
     setOpen(true);
   };
-  const handleClose = () => {
+  const handleCloseNew = () => {
     setOpen(false);
   };
+  /////////////// NEW WISH////////////////
+  /////////////// ACTION PLAN ////////////
+  const [openAction, setOpenAction] = useState(false);
 
+  const handleClickOpenAction = () => {
+    setOpenAction(true);
+  };
+  const handleCloseAction = () => {
+    setOpenAction(false);
+  };
+
+  /////////////// ACTION PLAN ////////////
   return (
     <div>
       <ResponsiveAppBar domain={props.domain} />
 
-      <NewWish open={open} handleClose={handleClose} props={props} />
+      <NewWish open={open} handleClose={handleCloseNew} props={props} />
+      <ActionPlan
+        open={openAction}
+        handleClose={handleCloseAction}
+        props={props}
+      />
       <Container maxWidth="md">
         <Box
           position="fixed"
@@ -39,7 +57,7 @@ const Home = (props: any) => {
         >
           {" "}
           <Tooltip title="New Wish" placement="top">
-            <Fab onClick={handleClickOpen} color="primary" aria-label="add">
+            <Fab onClick={handleClickOpenNew} color="primary" aria-label="add">
               <AddIcon />
             </Fab>
           </Tooltip>
@@ -48,7 +66,7 @@ const Home = (props: any) => {
           <Profile
             user={props.user}
             wishes_user={props.wishes_user}
-            handleClickOpen={handleClickOpen}
+            handleClickOpen={handleClickOpenAction}
           ></Profile>
         )}
 

@@ -6,21 +6,60 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import OutlinedInput from "@mui/material/OutlinedInput";
+import Slide from "@mui/material/Slide";
+import { TransitionProps } from "@mui/material/transitions";
+import { useRouter } from "next/router";
+import axios from "axios";
 
 interface ForgotPasswordProps {
   open: boolean;
   handleClose: () => void;
+  props: any;
 }
 
-export default function ActionPlan({ open, handleClose }: ForgotPasswordProps) {
+const Transition = React.forwardRef(function Transition(
+  props: TransitionProps & {
+    children: React.ReactElement<any, any>;
+  },
+  ref: React.Ref<unknown>
+) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
+
+export default function ActionPlan({
+  open,
+  handleClose,
+  props,
+}: ForgotPasswordProps) {
+  const router = useRouter();
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    try {
+      await axios.post(`${props.domain}/users/action_plan`, {
+        content: data.get("content"),
+      });
+
+      router.push("/"); //リダイレクト
+    } catch (err) {
+      alert("投稿に失敗しました");
+    }
+  };
+
   return (
     <Dialog
       open={open}
       onClose={handleClose}
+      TransitionComponent={Transition}
       PaperProps={{
         component: "form",
         onSubmit: (event: React.FormEvent<HTMLFormElement>) => {
           event.preventDefault();
+          const formData = new FormData(event.currentTarget);
+          const formJson = Object.fromEntries((formData as any).entries());
+          const content = formJson.content;
+          console.log(content);
+          handleSubmit(event);
           handleClose();
         },
       }}
@@ -30,17 +69,17 @@ export default function ActionPlan({ open, handleClose }: ForgotPasswordProps) {
         sx={{ display: "flex", flexDirection: "column", gap: 2, width: "100%" }}
       >
         <DialogContentText>
-          wishリストとwishそれぞれのアツさをもとにアクションプランを作成します。
+          wishリストとwishのアツさをもとにアクションプランを作成します。
         </DialogContentText>
         <OutlinedInput
           autoFocus
           required
           margin="dense"
-          id="additional"
-          name="additional"
-          label="additional"
+          id="content"
+          name="content"
+          label="content"
           placeholder="空き時間や人数、ジャンルなど希望があれば入力"
-          type="additional"
+          type="content"
           fullWidth
         />
       </DialogContent>

@@ -70,7 +70,7 @@ const Profile = (props: any) => {
           </Paper>
         </Container>
       </div>
-      <ActionPlan open={open} handleClose={handleClose} />
+      <ActionPlan open={open} handleClose={handleClose} props={props} />
       <div>wishリスト</div>
       <div className={styles.wishcontainer}>
         {props.wishes.map((wish: any) => (
