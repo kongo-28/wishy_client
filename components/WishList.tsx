@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import Link from "next/link";
 import styles from "@/styles/Home.module.css";
 import Wish from "@/components/Wish";
-import Box from "@mui/material/Box";
+import { Box } from "@mui/system";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Button from "@mui/material/Button";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
+import { Container } from "@mui/material";
+import { pink } from "@mui/material/colors";
 
 const WishList = (props: any) => {
   interface TabPanelProps {
@@ -161,92 +163,147 @@ const WishList = (props: any) => {
   /////////////////////////////////////////////並び替え機能///////////////////////////////////////////////////////
 
   return (
-    <div className={styles.wishcontainer}>
-      <Box sx={{ width: "100%" }}>
-        <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-          <div className={styles.wishTabs}>
-            <Tabs
-              value={value}
-              onChange={handleChange}
-              aria-label="basic tabs example"
-            >
-              <Tab label="ALL WISH" {...a11yProps(0)} />
-              <Tab label="MY WISH" {...a11yProps(1)} />
-            </Tabs>
+    <div className={styles.wishTabsContainer}>
+      <div className={styles.wishTabs}>
+        <Box sx={{ width: "100%" }}>
+          <Container maxWidth="md">
+            <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+              <Tabs
+                value={value}
+                onChange={handleChange}
+                aria-label="basic tabs example"
+              >
+                <Tab label="ALL WISH" {...a11yProps(0)} />
+                <Tab label="MY WISH" {...a11yProps(1)} />
+              </Tabs>
+            </Box>
+          </Container>
+          <div className={styles.wishListBoxContainer}>
+            <div className={styles.wishListBox}>
+              <CustomTabPanel value={value} index={0}>
+                <Box
+                  flexDirection="row"
+                  justifyContent="flex-end"
+                  display="flex"
+                >
+                  <Button onClick={handleSortDate}>投稿順</Button>
+                  {sortOrder == "ascend" && (
+                    <ArrowUpwardIcon
+                      onClick={handleSortDate}
+                      sx={{ color: pink[500] }}
+                      fontSize="small"
+                    ></ArrowUpwardIcon>
+                  )}
+                  {sortOrder == "descend" && (
+                    <ArrowDownwardIcon
+                      onClick={handleSortDate}
+                      sx={{ color: pink[500] }}
+                      fontSize="small"
+                    ></ArrowDownwardIcon>
+                  )}
+
+                  <Button onClick={handleSortLikes}>いいね順</Button>
+                  {sortOrder == "likes_ascend" && (
+                    <ArrowUpwardIcon
+                      onClick={handleSortLikes}
+                      sx={{ color: pink[500] }}
+                      fontSize="small"
+                    ></ArrowUpwardIcon>
+                  )}
+                  {sortOrder == "likes_descend" && (
+                    <ArrowDownwardIcon
+                      onClick={handleSortLikes}
+                      sx={{ color: pink[500] }}
+                      fontSize="small"
+                    ></ArrowDownwardIcon>
+                  )}
+                </Box>
+
+                {sortedWishes.map((wish: any) => (
+                  <div key={wish.id}>
+                    <Wish
+                      wish={wish}
+                      user={props.user}
+                      domain={props.domain}
+                    ></Wish>
+                  </div>
+                ))}
+              </CustomTabPanel>
+              {props.user && (
+                <CustomTabPanel value={value} index={1}>
+                  <Box
+                    flexDirection="row"
+                    justifyContent="flex-end"
+                    display="flex"
+                  >
+                    <Button onClick={handleSortDateUser}>投稿順</Button>
+                    {sortOrderUser == "ascend" && (
+                      <ArrowUpwardIcon
+                        onClick={handleSortDateUser}
+                        sx={{ color: pink[500] }}
+                        fontSize="small"
+                      ></ArrowUpwardIcon>
+                    )}
+                    {sortOrderUser == "descend" && (
+                      <ArrowDownwardIcon
+                        onClick={handleSortDateUser}
+                        sx={{ color: pink[500] }}
+                        fontSize="small"
+                      ></ArrowDownwardIcon>
+                    )}
+
+                    <Button onClick={handleSortLikesUser}>いいね順</Button>
+                    {sortOrderUser == "likes_ascend" && (
+                      <ArrowUpwardIcon
+                        onClick={handleSortLikesUser}
+                        sx={{ color: pink[500] }}
+                        fontSize="small"
+                      ></ArrowUpwardIcon>
+                    )}
+                    {sortOrderUser == "likes_descend" && (
+                      <ArrowDownwardIcon
+                        onClick={handleSortLikesUser}
+                        sx={{ color: pink[500] }}
+                        fontSize="small"
+                      ></ArrowDownwardIcon>
+                    )}
+                  </Box>
+
+                  {sortedWishesUser.map((wish: any) => (
+                    <div key={wish.id}>
+                      <Wish
+                        wish={wish}
+                        user={props.user}
+                        domain={props.domain}
+                      ></Wish>
+                    </div>
+                  ))}
+                </CustomTabPanel>
+              )}
+              {!props.user && (
+                <CustomTabPanel value={value} index={1}>
+                  {/* // ユーザーがいない場合に表示させるパネル*/}
+                  <div>
+                    <p>
+                      ログインしてへんで！
+                      <br />
+                      いいねが保存されへんからログインかアカウント作るか
+                      <br />
+                      どっちかしてや！
+                    </p>
+                    <Button variant="contained">
+                      <Link href="/signin">signin</Link>
+                    </Button>
+                    <Button variant="contained">
+                      <Link href="/signup">signup</Link>
+                    </Button>
+                  </div>
+                </CustomTabPanel>
+              )}
+            </div>
           </div>
         </Box>
-
-        <CustomTabPanel value={value} index={0}>
-          <Button onClick={handleSortDate}>投稿順</Button>
-          {sortOrder == "ascend" && (
-            <ArrowUpwardIcon fontSize="small"></ArrowUpwardIcon>
-          )}
-          {sortOrder == "descend" && (
-            <ArrowDownwardIcon fontSize="small"></ArrowDownwardIcon>
-          )}
-
-          <Button onClick={handleSortLikes}>いいね順</Button>
-          {sortOrder == "likes_ascend" && (
-            <ArrowUpwardIcon fontSize="small"></ArrowUpwardIcon>
-          )}
-          {sortOrder == "likes_descend" && (
-            <ArrowDownwardIcon fontSize="small"></ArrowDownwardIcon>
-          )}
-
-          {sortedWishes.map((wish: any) => (
-            <div key={wish.id} className={styles.postCard}>
-              <Wish wish={wish} user={props.user} domain={props.domain}></Wish>
-            </div>
-          ))}
-        </CustomTabPanel>
-        {props.user && (
-          <CustomTabPanel value={value} index={1}>
-            <Button onClick={handleSortDateUser}>投稿順</Button>
-            {sortOrderUser == "ascend" && <ArrowUpwardIcon></ArrowUpwardIcon>}
-            {sortOrderUser == "descend" && (
-              <ArrowDownwardIcon></ArrowDownwardIcon>
-            )}
-
-            <Button onClick={handleSortLikesUser}>いいね順</Button>
-            {sortOrderUser == "likes_ascend" && (
-              <ArrowUpwardIcon fontSize="small"></ArrowUpwardIcon>
-            )}
-            {sortOrderUser == "likes_descend" && (
-              <ArrowDownwardIcon fontSize="small"></ArrowDownwardIcon>
-            )}
-
-            {sortedWishesUser.map((wish: any) => (
-              <div key={wish.id} className={styles.postCard}>
-                <Wish
-                  wish={wish}
-                  user={props.user}
-                  domain={props.domain}
-                ></Wish>
-              </div>
-            ))}
-          </CustomTabPanel>
-        )}
-        {!props.user && (
-          <CustomTabPanel value={value} index={1}>
-            {/* // ユーザーがいない場合に表示させるパネル*/}
-            <div>
-              <p>
-                ログインしてへんで！
-                <br />
-                いいねが保存されへんからログインかアカウント作るか
-                <br />
-                どっちかしてや！
-              </p>
-              <Button variant="contained">
-                <Link href="/signin">signin</Link>
-              </Button>
-              <Button variant="contained">
-                <Link href="/signup">signup</Link>
-              </Button>
-            </div>
-          </CustomTabPanel>
-        )}
-      </Box>
+      </div>
     </div>
   );
 };

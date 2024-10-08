@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { GetServerSideProps } from "next";
 import { withAuthServerSideProps } from "@/lib/auth";
 import ResponsiveAppBar from "@/components/ResponsiveAppBar";
-import styles from "@/styles/Home.module.css";
 import Box from "@mui/material/Box";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
@@ -25,7 +24,7 @@ const Home = (props: any) => {
   };
 
   return (
-    <div className={styles.main}>
+    <div>
       <ResponsiveAppBar domain={props.domain} />
 
       <NewWish open={open} handleClose={handleClose} props={props} />

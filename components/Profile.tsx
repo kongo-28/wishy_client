@@ -1,6 +1,6 @@
 import React from "react";
-import Link from "next/link";
 import styles from "@/styles/Home.module.css";
+import Link from "next/link";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import SendIcon from "@mui/icons-material/Send";
@@ -36,10 +36,14 @@ const clickHandler = async (wishes_user: any) => {
 
 const Profile = ({ user, wishes_user, handleClickOpen }: any) => {
   return (
-    <div className={styles.wishcontainer}>
-      <Container maxWidth="md">
-        <Paper>
-          <Card variant="outlined" sx={{ minWidth: 300 }}>
+    <div className={styles.profileContainer}>
+      <div className={styles.profile}>
+        <Paper
+          sx={{
+            borderRadius: 5,
+          }}
+        >
+          <Card variant="outlined">
             <CardHeader
               avatar={
                 <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
@@ -57,22 +61,36 @@ const Profile = ({ user, wishes_user, handleClickOpen }: any) => {
             </CardActions>
           </Card>
           <Stack spacing={2} direction="row">
-            <Button variant="contained">
-              <Link href="/candidate">wish候補提案</Link>
-            </Button>
-            <Button variant="contained" onClick={handleClickOpen}>
-              アクションプラン作成
+            <Button
+              variant="contained"
+              sx={{
+                width: 300,
+              }}
+            >
+              <Link href="/candidate">wish候補</Link>
             </Button>
             <Button
               variant="contained"
+              sx={{
+                width: 300,
+              }}
+              onClick={handleClickOpen}
+            >
+              プラン作成
+            </Button>
+            <Button
+              variant="contained"
+              sx={{
+                width: 300,
+              }}
               onClick={() => clickHandler(wishes_user)}
               endIcon={<SendIcon />}
             >
-              wishリストの共有
+              リスト共有
             </Button>
           </Stack>
         </Paper>
-      </Container>
+      </div>
     </div>
   );
 };

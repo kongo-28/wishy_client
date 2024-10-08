@@ -1,15 +1,13 @@
 import * as React from "react";
-import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button";
-import { Link } from "@mui/material";
+import { Container } from "@mui/material";
+import styles from "@/styles/Home.module.css";
+import Paper from "@mui/material/Paper";
 
 const Footer = () => {
   return (
-    <div>
-      <Stack spacing={2} direction="row">
-        <div>©2024 k.ryota</div>
-      </Stack>
-    </div>
+    <Container maxWidth="xl">
+      <div className={styles.footer}>©2024 k.ryota</div>
+    </Container>
   );
 };
 

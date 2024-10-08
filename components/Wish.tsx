@@ -9,8 +9,6 @@ import ShareIcon from "@mui/icons-material/Share";
 import { pink } from "@mui/material/colors";
 import LocalFireDepartmentIcon from "@mui/icons-material/LocalFireDepartment";
 import axios from "axios";
-import Container from "@mui/material/Container";
-import { Paper } from "@mui/material";
 import { useDebouncedCallback } from "use-debounce";
 
 const Wish = ({ wish, user, domain }: any) => {
@@ -45,55 +43,55 @@ const Wish = ({ wish, user, domain }: any) => {
     500
   );
 
+  const clickHandler = async (wish: any) => {
+    const title = wish.title;
+    const count = wish.likes[0].count;
+    const message = `${title}\t${count}`;
+
+    try {
+      await navigator.clipboard.writeText(message);
+      alert("wishをクリップボードに保存しました。");
+    } catch (error) {
+      alert("クリップボードへの貼り付けが失敗しました。");
+    }
+  };
+
   return (
-    <div>
-      <Container maxWidth="md">
-        <Paper>
-          <Card variant="outlined" sx={{ minWidth: 300 }}>
-            <CardHeader
-              title={wish.title}
-              subheader={wish.updated_at.slice(0, 16)}
-            />
-            <CardContent>
-              {" "}
-              <p>{wish.content}</p>
-            </CardContent>
-            <CardActions disableSpacing>
-              <IconButton
-                aria-label="add to favorites"
-                onClick={() => {
-                  setLikes(likes + 1);
-                  debouncedHandleClickLikes();
-                }}
-              >
-                <FavoriteIcon />
-                {likes}
-              </IconButton>
-              <IconButton
-                aria-label="add to favorites"
-                onClick={() => {
-                  setLikes(likes + 9);
-                  debouncedHandleClickLikes();
-                }}
-              >
-                <LocalFireDepartmentIcon
-                  sx={{ fontSize: 50, color: pink[500] }}
-                />
-              </IconButton>
-              <IconButton
-                aria-label="share"
-                onClick={() => {
-                  setLikes(likes + 100);
-                  debouncedHandleClickLikes();
-                }}
-              >
-                <ShareIcon />
-              </IconButton>
-            </CardActions>
-          </Card>
-        </Paper>
-      </Container>
-    </div>
+    <Card variant="outlined">
+      <CardHeader title={wish.title} subheader={wish.updated_at.slice(0, 16)} />
+      <CardContent>
+        <p>{wish.content}</p>
+      </CardContent>
+      <CardActions disableSpacing>
+        <IconButton
+          aria-label="add to favorites"
+          onClick={() => {
+            setLikes(likes + 1);
+            debouncedHandleClickLikes();
+          }}
+        >
+          <FavoriteIcon />
+          {likes}
+        </IconButton>
+        <IconButton
+          aria-label="add to favorites"
+          onClick={() => {
+            setLikes(likes + 9);
+            debouncedHandleClickLikes();
+          }}
+        >
+          <LocalFireDepartmentIcon sx={{ fontSize: 50, color: pink[500] }} />
+        </IconButton>
+        <IconButton
+          aria-label="share"
+          onClick={() => {
+            clickHandler(wish);
+          }}
+        >
+          <ShareIcon />
+        </IconButton>
+      </CardActions>
+    </Card>
   );
 };
 
