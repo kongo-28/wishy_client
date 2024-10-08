@@ -9,6 +9,7 @@ import NewWish from "@/components/NewWish";
 import Footer from "@/components/Footer";
 import Profile from "@/components/Profile";
 import WishList from "@/components/WishList";
+import { Container } from "@mui/material";
 
 export const getServerSideProps: GetServerSideProps =
   withAuthServerSideProps("/wishes");
@@ -28,32 +29,32 @@ const Home = (props: any) => {
       <ResponsiveAppBar domain={props.domain} />
 
       <NewWish open={open} handleClose={handleClose} props={props} />
+      <Container maxWidth="md">
+        <Box
+          position="fixed"
+          bottom="20px"
+          right="20px"
+          sx={{ "& > :not(style)": { m: 1 } }}
+        >
+          <Fab onClick={handleClickOpen} color="primary" aria-label="add">
+            <AddIcon />
+          </Fab>
+        </Box>
+        {props.user && (
+          <Profile
+            user={props.user}
+            wishes_user={props.wishes_user}
+            handleClickOpen={handleClickOpen}
+          ></Profile>
+        )}
 
-      <Box
-        position="fixed"
-        bottom="20px"
-        right="20px"
-        sx={{ "& > :not(style)": { m: 1 } }}
-      >
-        <Fab onClick={handleClickOpen} color="primary" aria-label="add">
-          <AddIcon />
-        </Fab>
-      </Box>
-      {props.user && (
-        <Profile
+        <WishList
+          wishes={props.wishes}
           user={props.user}
+          domain={props.domain}
           wishes_user={props.wishes_user}
-          handleClickOpen={handleClickOpen}
-        ></Profile>
-      )}
-
-      <WishList
-        wishes={props.wishes}
-        user={props.user}
-        domain={props.domain}
-        wishes_user={props.wishes_user}
-      ></WishList>
-
+        ></WishList>
+      </Container>
       <Footer></Footer>
     </div>
   );

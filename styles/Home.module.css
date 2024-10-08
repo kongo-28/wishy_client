@@ -115,7 +115,7 @@ a.secondary {
   background-color: #ffffff;
   max-width: 900px;
   width: 100%;
-  border-radius: 5px;
+  /* border-radius: 5px; */
 }
 
 .profileContainer {
@@ -128,7 +128,7 @@ a.secondary {
   background-color: #ffffff;
   max-width: 900px;
   width: 100%;
-  border-radius: 5px;
+  /* border-radius: 5px; */
 }
 
 .wishTabsContainer {

@@ -29,7 +29,7 @@ const WishList = (props: any) => {
         aria-labelledby={`simple-tab-${index}`}
         {...other}
       >
-        {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
+        {value === index && <Box>{children}</Box>}
       </div>
     );
   }
@@ -166,18 +166,22 @@ const WishList = (props: any) => {
     <div className={styles.wishTabsContainer}>
       <div className={styles.wishTabs}>
         <Box sx={{ width: "100%" }}>
-          <Container maxWidth="md">
-            <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-              <Tabs
-                value={value}
-                onChange={handleChange}
-                aria-label="basic tabs example"
-              >
-                <Tab label="ALL WISH" {...a11yProps(0)} />
-                <Tab label="MY WISH" {...a11yProps(1)} />
-              </Tabs>
-            </Box>
-          </Container>
+          {/* <Container maxWidth="md"> */}
+          <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+            <Tabs
+              value={value}
+              onChange={handleChange}
+              aria-label="basic tabs example"
+            >
+              <Tab
+                label="ALL WISH"
+                {...a11yProps(0)}
+                //  sx={{ width: 300 }}
+              />
+              <Tab label="MY WISH" {...a11yProps(1)} />
+            </Tabs>
+          </Box>
+          {/* </Container> */}
           <div className={styles.wishListBoxContainer}>
             <div className={styles.wishListBox}>
               <CustomTabPanel value={value} index={0}>

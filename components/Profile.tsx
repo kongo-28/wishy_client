@@ -2,9 +2,7 @@ import React from "react";
 import styles from "@/styles/Home.module.css";
 import Link from "next/link";
 import Button from "@mui/material/Button";
-import Stack from "@mui/material/Stack";
 import SendIcon from "@mui/icons-material/Send";
-import Container from "@mui/material/Container";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
@@ -38,11 +36,7 @@ const Profile = ({ user, wishes_user, handleClickOpen }: any) => {
   return (
     <div className={styles.profileContainer}>
       <div className={styles.profile}>
-        <Paper
-          sx={{
-            borderRadius: 5,
-          }}
-        >
+        <Paper>
           <Card variant="outlined">
             <CardHeader
               avatar={
@@ -54,41 +48,42 @@ const Profile = ({ user, wishes_user, handleClickOpen }: any) => {
             />
             <CardContent>
               {" "}
-              叶えたいこととかやりたいことの方針的なこと
-            </CardContent>
-            <CardActions disableSpacing>
+              叶えたいこととかやりたいことの方針的なこと <br />
               総いいね:777 総WISH:77 叶えたWISH:7
+            </CardContent>
+            <CardActions>
+              <Button
+                variant="contained"
+                sx={{
+                  width: 300,
+                  borderRadius: 0,
+                }}
+              >
+                <Link href="/candidate">wish候補</Link>
+              </Button>
+              <Button
+                variant="contained"
+                sx={{
+                  width: 300,
+                  borderRadius: 0,
+                }}
+                onClick={handleClickOpen}
+              >
+                プラン作成
+              </Button>
+              <Button
+                variant="contained"
+                sx={{
+                  width: 300,
+                  borderRadius: 0,
+                }}
+                onClick={() => clickHandler(wishes_user)}
+                endIcon={<SendIcon />}
+              >
+                リスト共有
+              </Button>
             </CardActions>
           </Card>
-          <Stack spacing={2} direction="row">
-            <Button
-              variant="contained"
-              sx={{
-                width: 300,
-              }}
-            >
-              <Link href="/candidate">wish候補</Link>
-            </Button>
-            <Button
-              variant="contained"
-              sx={{
-                width: 300,
-              }}
-              onClick={handleClickOpen}
-            >
-              プラン作成
-            </Button>
-            <Button
-              variant="contained"
-              sx={{
-                width: 300,
-              }}
-              onClick={() => clickHandler(wishes_user)}
-              endIcon={<SendIcon />}
-            >
-              リスト共有
-            </Button>
-          </Stack>
         </Paper>
       </div>
     </div>
