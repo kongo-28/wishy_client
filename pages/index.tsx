@@ -10,6 +10,7 @@ import Footer from "@/components/Footer";
 import Profile from "@/components/Profile";
 import WishList from "@/components/WishList";
 import { Container } from "@mui/material";
+import Tooltip from "@mui/material/Tooltip";
 
 export const getServerSideProps: GetServerSideProps =
   withAuthServerSideProps("/wishes");
@@ -36,9 +37,12 @@ const Home = (props: any) => {
           right="20px"
           sx={{ "& > :not(style)": { m: 1 } }}
         >
-          <Fab onClick={handleClickOpen} color="primary" aria-label="add">
-            <AddIcon />
-          </Fab>
+          {" "}
+          <Tooltip title="New Wish" placement="top">
+            <Fab onClick={handleClickOpen} color="primary" aria-label="add">
+              <AddIcon />
+            </Fab>
+          </Tooltip>
         </Box>
         {props.user && (
           <Profile
