@@ -6,6 +6,8 @@ import Box from "@mui/material/Box";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Button from "@mui/material/Button";
+import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
+import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 
 const WishList = (props: any) => {
   interface TabPanelProps {
@@ -43,6 +45,69 @@ const WishList = (props: any) => {
     setValue(newValue);
   };
 
+  /////////////////////////////////////////////並び替え機能///////////////////////////////////////////////////////
+  const [sortedWishes, setSortedWishes] = useState(props.wishes);
+  const [sortOrder, setSortOrder] = useState("none"); // none, ascend, descend
+  ///////////////////投稿順////////////////////
+  const handleSortDate = () => {
+    let newSortOrder;
+    let sortedWishes;
+
+    if (sortOrder === "none") {
+      sortedWishes = [...props.wishes].sort((a, b) => {
+        if (a.updated_at < b.updated_at) return -1;
+        if (a.updated_at > b.updated_at) return 1;
+        return 0;
+      });
+      newSortOrder = "ascend";
+    } else if (sortOrder === "ascend") {
+      sortedWishes = [...props.wishes].sort((a, b) => {
+        if (a.updated_at < b.updated_at) return 1;
+        if (a.updated_at > b.updated_at) return -1;
+        return 0;
+      });
+      newSortOrder = "descend";
+    } else {
+      sortedWishes = props.wishes;
+      newSortOrder = "none";
+    }
+
+    setSortedWishes(sortedWishes);
+    setSortOrder(newSortOrder);
+  };
+
+  ///////MY WISH LIST
+  const [sortedWishesUser, setSortedWishesUser] = useState(props.wishes_user);
+  const [sortOrderUser, setSortOrderUser] = useState("none"); // none, ascend, descend
+
+  const handleSortDateUser = () => {
+    let newSortOrderUser;
+    let sortedWishesUser;
+
+    if (sortOrderUser === "none") {
+      sortedWishesUser = [...props.wishes_user].sort((a, b) => {
+        if (a.updated_at < b.updated_at) return -1;
+        if (a.updated_at > b.updated_at) return 1;
+        return 0;
+      });
+      newSortOrderUser = "ascend";
+    } else if (sortOrderUser === "ascend") {
+      sortedWishesUser = [...props.wishes_user].sort((a, b) => {
+        if (a.updated_at < b.updated_at) return 1;
+        if (a.updated_at > b.updated_at) return -1;
+        return 0;
+      });
+      newSortOrderUser = "descend";
+    } else {
+      sortedWishesUser = props.wishes_user;
+      newSortOrderUser = "none";
+    }
+
+    setSortedWishesUser(sortedWishesUser);
+    setSortOrderUser(newSortOrderUser);
+  };
+  /////////////////////////////////////////////並び替え機能///////////////////////////////////////////////////////
+
   return (
     <div className={styles.wishcontainer}>
       <Box sx={{ width: "100%" }}>
@@ -59,8 +124,13 @@ const WishList = (props: any) => {
             </Tabs>
           </div>
         </Box>
+
         <CustomTabPanel value={value} index={0}>
-          {props.wishes.map((wish: any) => (
+          <Button onClick={handleSortDate}>投稿順</Button>
+          {sortOrder == "ascend" && <ArrowUpwardIcon></ArrowUpwardIcon>}
+          {sortOrder == "descend" && <ArrowDownwardIcon></ArrowDownwardIcon>}
+
+          {sortedWishes.map((wish: any) => (
             <div key={wish.id} className={styles.postCard}>
               <Wish wish={wish} user={props.user} domain={props.domain}></Wish>
             </div>
@@ -68,7 +138,12 @@ const WishList = (props: any) => {
         </CustomTabPanel>
         {props.user && (
           <CustomTabPanel value={value} index={1}>
-            {props.wishes_user.map((wish: any) => (
+            <Button onClick={handleSortDateUser}>投稿順</Button>
+            {sortOrderUser == "ascend" && <ArrowUpwardIcon></ArrowUpwardIcon>}
+            {sortOrderUser == "descend" && (
+              <ArrowDownwardIcon></ArrowDownwardIcon>
+            )}
+            {sortedWishesUser.map((wish: any) => (
               <div key={wish.id} className={styles.postCard}>
                 <Wish
                   wish={wish}
