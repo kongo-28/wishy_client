@@ -78,7 +78,6 @@ const Profile = ({ user, wishes_user, handleClickOpen }: any) => {
                   borderRadius: 0,
                 }}
                 onClick={() => clickHandler(wishes_user)}
-                endIcon={<SendIcon />}
               >
                 リスト共有
               </Button>
