@@ -18,7 +18,7 @@ import Cookies from "js-cookie";
 import axios from "axios";
 
 const pages = [
-  "---",
+  "chat",
   // "New_Wish",
   // , "Pricing", "Blog"
 ];
@@ -120,8 +120,8 @@ function ResponsiveAppBar({ domain }: any) {
               >
                 {pages.map((page) => (
                   <MenuItem key={page} onClick={handleCloseNavMenu}>
-                    <Typography sx={{ textAlign: "center" }}>{page}</Typography>
-                    {/* <Link href={`/${page.toLowerCase()}`}>{page}</Link> */}
+                    {/* <Typography sx={{ textAlign: "center" }}>{page}</Typography> */}
+                    <Link href={`/${page.toLowerCase()}`}>{page}</Link>
                   </MenuItem>
                 ))}
               </Menu>
@@ -148,7 +148,7 @@ function ResponsiveAppBar({ domain }: any) {
               {pages.map((page) => (
                 <Button
                   key={page}
-                  // href={`/${page.toLowerCase()}`}
+                  href={`/${page.toLowerCase()}`}
                   onClick={handleCloseNavMenu}
                   sx={{ my: 2, color: "white", display: "block" }}
                 >
