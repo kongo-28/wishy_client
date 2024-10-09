@@ -10,6 +10,7 @@ import Slide from "@mui/material/Slide";
 import { TransitionProps } from "@mui/material/transitions";
 import { useRouter } from "next/router";
 import axios from "axios";
+import Cookies from "js-cookie";
 
 interface ForgotPasswordProps {
   open: boolean;
@@ -31,20 +32,29 @@ export default function ActionPlan({
   handleClose,
   props,
 }: ForgotPasswordProps) {
+  //////////// アクションプラン作成リクエスト ////////////
   const router = useRouter();
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     try {
-      await axios.post(`${props.domain}/users/action_plan`, {
-        content: data.get("content"),
-      });
-
+      await axios.post(
+        `${props.domain}/users/action_plan`,
+        { content: data.get("content") },
+        {
+          headers: {
+            uid: Cookies.get("uid"),
+            client: Cookies.get("client"),
+            "access-token": Cookies.get("access-token"),
+          },
+        }
+      );
       router.push("/"); //リダイレクト
     } catch (err) {
       alert("投稿に失敗しました");
     }
   };
+  //////////// アクションプラン作成リクエスト ////////////
 
   return (
     <Dialog
