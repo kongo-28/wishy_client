@@ -51,7 +51,7 @@ export default function ActionPlan({
       );
       router.push("/"); //リダイレクト
     } catch (err) {
-      alert("投稿に失敗しました");
+      alert("アクションプランのリクエストに失敗しました");
     }
   };
   //////////// アクションプラン作成リクエスト ////////////
