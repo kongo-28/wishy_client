@@ -40,7 +40,7 @@ export default function ActionPlan({
     try {
       await axios.post(
         `${props.domain}/users/action_plan`,
-        { content: data.get("content") },
+        { user: { request: data.get("request") } },
         {
           headers: {
             uid: Cookies.get("uid"),
@@ -67,8 +67,8 @@ export default function ActionPlan({
           event.preventDefault();
           const formData = new FormData(event.currentTarget);
           const formJson = Object.fromEntries((formData as any).entries());
-          const content = formJson.content;
-          console.log(content);
+          const request = formJson.request;
+          console.log(request);
           handleSubmit(event);
           handleClose();
         },
@@ -85,11 +85,11 @@ export default function ActionPlan({
           autoFocus
           required
           margin="dense"
-          id="content"
-          name="content"
-          label="content"
+          id="request"
+          name="request"
+          label="request"
           placeholder="空き時間や人数、ジャンルなど希望があれば入力"
-          type="content"
+          type="request"
           fullWidth
         />
       </DialogContent>
