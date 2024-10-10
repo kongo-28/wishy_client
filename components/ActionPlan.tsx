@@ -8,10 +8,8 @@ import DialogTitle from "@mui/material/DialogTitle";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import Slide from "@mui/material/Slide";
 import { TransitionProps } from "@mui/material/transitions";
-import { useRouter } from "next/router";
 import axios from "axios";
 import Cookies from "js-cookie";
-import { useState } from "react";
 
 interface ForgotPasswordProps {
   open: boolean;
@@ -41,7 +39,6 @@ export default function ActionPlan({
 }: ForgotPasswordProps) {
   //////////// アクションプラン作成リクエスト ////////////
 
-  const router = useRouter();
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -61,9 +58,8 @@ export default function ActionPlan({
       setLoading(false); // ローディング終了
 
       // alert(`${JSON.stringify(response.data.content)}`); // レスポンスデータを表示する
-      setResponse(`${JSON.stringify(`${response.data.content}`)}`);
+      setResponse(`${JSON.stringify(response.data.content)}`);
       setOpenResponse(true);
-      // router.push("/"); //リダイレクト
     } catch (err) {
       alert("アクションプランのリクエストに失敗しました");
     }
@@ -94,6 +90,11 @@ export default function ActionPlan({
       >
         <DialogContentText>
           wishリストと熱意をもとにアクションプランを作成します。
+          <br /> ＜入力例＞
+          <br />
+          次の日曜日の午前中の予定を立てて！
+          <br />
+          友達3人と一緒に遊ぶ予定を立てて！
         </DialogContentText>
         <OutlinedInput
           autoFocus

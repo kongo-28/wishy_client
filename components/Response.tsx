@@ -11,7 +11,6 @@ import { TransitionProps } from "@mui/material/transitions";
 interface ForgotPasswordProps {
   open: boolean;
   handleClose: () => void;
-  props: any;
   response: any;
 }
 
@@ -22,7 +21,7 @@ const clickHandler = async (response: any) => {
 
   try {
     await navigator.clipboard.writeText(message);
-    alert("ACTION PLANをクリップボードに保存しました。");
+    alert("クリップボードに保存しました。");
   } catch (error) {
     alert("クリップボードへの貼り付けが失敗しました。");
   }
@@ -41,7 +40,6 @@ const Transition = React.forwardRef(function Transition(
 export default function Response({
   open,
   handleClose,
-  props,
   response,
 }: ForgotPasswordProps) {
   return (
@@ -61,7 +59,7 @@ export default function Response({
         },
       }}
     >
-      <DialogTitle>Action Plan</DialogTitle>
+      <DialogTitle>回答</DialogTitle>
       <DialogContent
         sx={{ display: "flex", flexDirection: "column", gap: 2, width: "100%" }}
       >

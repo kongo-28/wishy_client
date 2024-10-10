@@ -56,11 +56,8 @@ const Home = (props: any) => {
   /////////////// Candidate ////////////
   /////////////// Response ////////////
   const [openResponse, setOpenResponse] = useState(false);
-  const [response, setResponse] = useState("レスポンス！");
+  const [response, setResponse] = useState("");
 
-  const handleClickOpenResponse = () => {
-    setOpenResponse(true);
-  };
   const handleCloseResponse = () => {
     setOpenResponse(false);
   };
@@ -79,7 +76,6 @@ const Home = (props: any) => {
       <Response
         open={openResponse}
         handleClose={handleCloseResponse}
-        props={props}
         response={response}
       />
       <ActionPlan
@@ -94,6 +90,9 @@ const Home = (props: any) => {
         open={openCandidate}
         handleClose={handleCloseCandidate}
         props={props}
+        setLoading={setLoading}
+        setOpenResponse={setOpenResponse}
+        setResponse={setResponse}
       />
       <Container maxWidth="md">
         <Box

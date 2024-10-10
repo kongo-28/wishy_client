@@ -8,7 +8,6 @@ import DialogTitle from "@mui/material/DialogTitle";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import Slide from "@mui/material/Slide";
 import { TransitionProps } from "@mui/material/transitions";
-import { useRouter } from "next/router";
 import axios from "axios";
 import Cookies from "js-cookie";
 
@@ -16,6 +15,9 @@ interface ForgotPasswordProps {
   open: boolean;
   handleClose: () => void;
   props: any;
+  setLoading: any;
+  setOpenResponse: any;
+  setResponse: any;
 }
 
 const Transition = React.forwardRef(function Transition(
@@ -31,14 +33,17 @@ export default function Candidate({
   open,
   handleClose,
   props,
+  setLoading,
+  setOpenResponse,
+  setResponse,
 }: ForgotPasswordProps) {
   //////////// Wish候補作成リクエスト ////////////
-  const router = useRouter();
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+    setLoading(true); // ローディング開始
     try {
-      await axios.post(
+      const response = await axios.post(
         `${props.domain}/chats/candidate`,
         { request: data.get("request") },
         {
@@ -49,7 +54,10 @@ export default function Candidate({
           },
         }
       );
-      router.push("/"); //リダイレクト
+      setLoading(false); // ローディング終了
+      // alert(`${JSON.stringify(response.data.content)}`); // レスポンスデータを表示する
+      setResponse(`${JSON.stringify(response.data.content)}`);
+      setOpenResponse(true);
     } catch (err) {
       alert("Wish候補のリクエストに失敗しました");
     }
@@ -80,6 +88,9 @@ export default function Candidate({
       >
         <DialogContentText>
           wishリストと熱意をもとに新たなWISH候補を作成します。
+          <br /> ＜ジャンル例＞
+          <br />
+          友達、勉強、恋愛、おしゃれ、自分の性格、食べたいもの、趣味など
         </DialogContentText>
         <OutlinedInput
           autoFocus
