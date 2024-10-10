@@ -53,9 +53,9 @@ const Profile = ({
             />
             <CardContent>
               {" "}
-              総WISH:{user.wish_count} <br />
-              総いいね:{user.likes_sum} <br />
-              叶えたWISH:N
+              総WISH:{user.wish_count.toLocaleString()} <br />
+              総いいね:{user.likes_sum.toLocaleString()} <br />
+              {/* 叶えたWISH:N */}
             </CardContent>
             <CardActions>
               <Button

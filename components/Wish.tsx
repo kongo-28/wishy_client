@@ -71,8 +71,10 @@ const Wish = ({ wish, user, domain }: any) => {
             debouncedHandleClickLikes();
           }}
         >
-          <FavoriteIcon />
-          {likes}
+          {likes == 0 && <FavoriteIcon />}
+          {likes >= 1 && <FavoriteIcon sx={{ color: pink[500] }} />}
+          {likes < 1000 && <p>{likes}</p>}
+          {likes >= 1000 && <p>{(likes / 1000).toFixed(2)}k</p>}
         </IconButton>
         <IconButton
           aria-label="add to favorites"
@@ -81,7 +83,10 @@ const Wish = ({ wish, user, domain }: any) => {
             debouncedHandleClickLikes();
           }}
         >
-          <LocalFireDepartmentIcon sx={{ fontSize: 50, color: pink[500] }} />
+          {likes == 0 && <LocalFireDepartmentIcon sx={{ fontSize: 50 }} />}
+          {likes >= 1 && (
+            <LocalFireDepartmentIcon sx={{ fontSize: 50, color: pink[500] }} />
+          )}
         </IconButton>
         <IconButton
           aria-label="share"
