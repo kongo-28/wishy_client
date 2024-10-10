@@ -10,6 +10,7 @@ import { pink } from "@mui/material/colors";
 import LocalFireDepartmentIcon from "@mui/icons-material/LocalFireDepartment";
 import axios from "axios";
 import { useDebouncedCallback } from "use-debounce";
+import PeopleIcon from "@mui/icons-material/People";
 
 const Wish = ({ wish, user, domain }: any) => {
   let like_count = 0;
@@ -89,6 +90,10 @@ const Wish = ({ wish, user, domain }: any) => {
           }}
         >
           <ShareIcon />
+        </IconButton>
+        <IconButton>
+          <PeopleIcon></PeopleIcon>
+          {wish.likes_user_count}
         </IconButton>
       </CardActions>
     </Card>

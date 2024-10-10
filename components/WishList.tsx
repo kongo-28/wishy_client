@@ -103,6 +103,34 @@ const WishList = (props: any) => {
     setSortedWishes(sortedWishes);
     setSortOrder(newSortOrder);
   };
+  ///////////////////いいねユーザー順////////////////////
+  const handleSortUsers = () => {
+    let newSortOrder;
+    let sortedWishes;
+
+    const getUsersCount = (wish: any) =>
+      wish.likes_user_count && wish.likes_user_count
+        ? wish.likes_user_count
+        : 0;
+
+    if (sortOrder === "none") {
+      sortedWishes = [...props.wishes].sort((a, b) => {
+        return getUsersCount(a) - getUsersCount(b);
+      });
+      newSortOrder = "likes_user_count_ascend";
+    } else if (sortOrder === "likes_user_count_ascend") {
+      sortedWishes = [...props.wishes].sort((a, b) => {
+        return getUsersCount(b) - getUsersCount(a);
+      });
+      newSortOrder = "likes_user_count_descend";
+    } else {
+      sortedWishes = props.wishes;
+      newSortOrder = "none";
+    }
+
+    setSortedWishes(sortedWishes);
+    setSortOrder(newSortOrder);
+  };
   ///////MY WISH LIST
   const [sortedWishesUser, setSortedWishesUser] = useState(props.wishes_user);
   const [sortOrderUser, setSortOrderUser] = useState("none"); // none, ascend, descend
@@ -152,6 +180,33 @@ const WishList = (props: any) => {
         return 0;
       });
       newSortOrderUser = "likes_descend";
+    } else {
+      sortedWishesUser = props.wishes_user;
+      newSortOrderUser = "none";
+    }
+
+    setSortedWishesUser(sortedWishesUser);
+    setSortOrderUser(newSortOrderUser);
+  };
+  /////////////////いいねユーザー順////////////////////////
+  const handleSortUsersUser = () => {
+    let newSortOrderUser;
+    let sortedWishesUser;
+
+    if (sortOrderUser === "none") {
+      sortedWishesUser = [...props.wishes_user].sort((a, b) => {
+        if (a.likes_user_count < b.likes_user_count) return -1;
+        if (a.likes_user_count > b.likes_user_count) return 1;
+        return 0;
+      });
+      newSortOrderUser = "likes_user_count_ascend";
+    } else if (sortOrderUser === "likes_user_count_ascend") {
+      sortedWishesUser = [...props.wishes_user].sort((a, b) => {
+        if (a.likes_user_count < b.likes_user_count) return 1;
+        if (a.likes_user_count > b.likes_user_count) return -1;
+        return 0;
+      });
+      newSortOrderUser = "likes_user_count_descend";
     } else {
       sortedWishesUser = props.wishes_user;
       newSortOrderUser = "none";
@@ -221,6 +276,21 @@ const WishList = (props: any) => {
                       fontSize="small"
                     ></ArrowDownwardIcon>
                   )}
+                  <Button onClick={handleSortUsers}>ユーザー数順</Button>
+                  {sortOrder == "likes_user_count_ascend" && (
+                    <ArrowUpwardIcon
+                      onClick={handleSortUsers}
+                      sx={{ color: pink[500] }}
+                      fontSize="small"
+                    ></ArrowUpwardIcon>
+                  )}
+                  {sortOrder == "likes_user_count_descend" && (
+                    <ArrowDownwardIcon
+                      onClick={handleSortUsers}
+                      sx={{ color: pink[500] }}
+                      fontSize="small"
+                    ></ArrowDownwardIcon>
+                  )}
                 </Box>
 
                 {sortedWishes.map((wish: any) => (
@@ -267,6 +337,21 @@ const WishList = (props: any) => {
                     {sortOrderUser == "likes_descend" && (
                       <ArrowDownwardIcon
                         onClick={handleSortLikesUser}
+                        sx={{ color: pink[500] }}
+                        fontSize="small"
+                      ></ArrowDownwardIcon>
+                    )}
+                    <Button onClick={handleSortUsersUser}>ユーザー数順</Button>
+                    {sortOrderUser == "likes_user_count_ascend" && (
+                      <ArrowUpwardIcon
+                        onClick={handleSortUsersUser}
+                        sx={{ color: pink[500] }}
+                        fontSize="small"
+                      ></ArrowUpwardIcon>
+                    )}
+                    {sortOrderUser == "likes_user_count_descend" && (
+                      <ArrowDownwardIcon
+                        onClick={handleSortUsersUser}
                         sx={{ color: pink[500] }}
                         fontSize="small"
                       ></ArrowDownwardIcon>
