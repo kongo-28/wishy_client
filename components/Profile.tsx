@@ -53,8 +53,9 @@ const Profile = ({
             />
             <CardContent>
               {" "}
-              叶えたいこととかやりたいことの方針的なこと <br />
-              総いいね:777 総WISH:77 叶えたWISH:7
+              総WISH:{user.wish_count} <br />
+              総いいね:{user.likes_sum} <br />
+              叶えたWISH:N
             </CardContent>
             <CardActions>
               <Button
