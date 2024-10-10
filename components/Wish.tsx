@@ -74,7 +74,10 @@ const Wish = ({ wish, user, domain }: any) => {
           {likes == 0 && <FavoriteIcon />}
           {likes >= 1 && <FavoriteIcon sx={{ color: pink[500] }} />}
           {likes < 1000 && <p>{likes}</p>}
-          {likes >= 1000 && <p>{(likes / 1000).toFixed(2)}k</p>}
+          {likes >= 1000 && likes < 1000000 && (
+            <p>{(likes / 1000).toFixed(2)}k</p>
+          )}
+          {likes >= 1000000 && <p>{(likes / 1000000).toFixed(2)}m</p>}
         </IconButton>
         <IconButton
           aria-label="add to favorites"
