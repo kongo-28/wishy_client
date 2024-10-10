@@ -39,8 +39,8 @@ export default function ActionPlan({
     const data = new FormData(event.currentTarget);
     try {
       await axios.post(
-        `${props.domain}/users/action_plan`,
-        { user: { request: data.get("request") } },
+        `${props.domain}/chats`,
+        { request: data.get("request") },
         {
           headers: {
             uid: Cookies.get("uid"),
@@ -83,7 +83,6 @@ export default function ActionPlan({
         </DialogContentText>
         <OutlinedInput
           autoFocus
-          required
           margin="dense"
           id="request"
           name="request"
