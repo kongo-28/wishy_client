@@ -27,19 +27,19 @@ const Transition = React.forwardRef(function Transition(
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function ActionPlan({
+export default function Candidate({
   open,
   handleClose,
   props,
 }: ForgotPasswordProps) {
-  //////////// アクションプラン作成リクエスト ////////////
+  //////////// Wish候補作成リクエスト ////////////
   const router = useRouter();
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     try {
       await axios.post(
-        `${props.domain}/chats`,
+        `${props.domain}/chats/candidate`,
         { request: data.get("request") },
         {
           headers: {
@@ -51,10 +51,10 @@ export default function ActionPlan({
       );
       router.push("/"); //リダイレクト
     } catch (err) {
-      alert("アクションプランのリクエストに失敗しました");
+      alert("Wish候補のリクエストに失敗しました");
     }
   };
-  //////////// アクションプラン作成リクエスト ////////////
+  //////////// Wish候補作成リクエスト ////////////
 
   return (
     <Dialog
@@ -74,12 +74,12 @@ export default function ActionPlan({
         },
       }}
     >
-      <DialogTitle>Action Plan</DialogTitle>
+      <DialogTitle>WISH候補</DialogTitle>
       <DialogContent
         sx={{ display: "flex", flexDirection: "column", gap: 2, width: "100%" }}
       >
         <DialogContentText>
-          wishリストと熱意をもとにアクションプランを作成します。
+          wishリストと熱意をもとに新たなWISH候補を作成します。
         </DialogContentText>
         <OutlinedInput
           autoFocus

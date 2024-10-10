@@ -32,7 +32,12 @@ const clickHandler = async (wishes_user: any) => {
   }
 };
 
-const Profile = ({ user, wishes_user, handleClickOpen }: any) => {
+const Profile = ({
+  user,
+  wishes_user,
+  handleClickOpenAction,
+  handleClickOpenCandidate,
+}: any) => {
   return (
     <div className={styles.profileContainer}>
       <div className={styles.profile}>
@@ -58,8 +63,9 @@ const Profile = ({ user, wishes_user, handleClickOpen }: any) => {
                   width: 300,
                   borderRadius: 0,
                 }}
+                onClick={handleClickOpenCandidate}
               >
-                <Link href="/candidate">wish候補</Link>
+                wish候補
               </Button>
               <Button
                 variant="contained"
@@ -67,7 +73,7 @@ const Profile = ({ user, wishes_user, handleClickOpen }: any) => {
                   width: 300,
                   borderRadius: 0,
                 }}
-                onClick={handleClickOpen}
+                onClick={handleClickOpenAction}
               >
                 プラン作成
               </Button>

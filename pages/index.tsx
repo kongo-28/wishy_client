@@ -12,6 +12,7 @@ import WishList from "@/components/WishList";
 import { Container } from "@mui/material";
 import Tooltip from "@mui/material/Tooltip";
 import ActionPlan from "@/components/ActionPlan";
+import Candidate from "@/components/Candidate";
 
 export const getServerSideProps: GetServerSideProps =
   withAuthServerSideProps("/wishes");
@@ -38,6 +39,17 @@ const Home = (props: any) => {
   };
 
   /////////////// ACTION PLAN ////////////
+  /////////////// Candidate ////////////
+  const [openCandidate, setOpenCandidate] = useState(false);
+
+  const handleClickOpenCandidate = () => {
+    setOpenCandidate(true);
+  };
+  const handleCloseCandidate = () => {
+    setOpenCandidate(false);
+  };
+
+  /////////////// Candidate ////////////
   return (
     <div>
       <ResponsiveAppBar domain={props.domain} />
@@ -46,6 +58,11 @@ const Home = (props: any) => {
       <ActionPlan
         open={openAction}
         handleClose={handleCloseAction}
+        props={props}
+      />
+      <Candidate
+        open={openCandidate}
+        handleClose={handleCloseCandidate}
         props={props}
       />
       <Container maxWidth="md">
@@ -66,7 +83,8 @@ const Home = (props: any) => {
           <Profile
             user={props.user}
             wishes_user={props.wishes_user}
-            handleClickOpen={handleClickOpenAction}
+            handleClickOpenAction={handleClickOpenAction}
+            handleClickOpenCandidate={handleClickOpenCandidate}
           ></Profile>
         )}
 
