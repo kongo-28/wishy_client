@@ -46,8 +46,7 @@ const Wish = ({ wish, user, domain }: any) => {
 
   const clickHandler = async (wish: any) => {
     const title = wish.title;
-    const count = wish.likes[0].count;
-    const message = `${title}\t${count}`;
+    const message = `${title}`;
 
     try {
       await navigator.clipboard.writeText(message);
