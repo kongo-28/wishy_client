@@ -287,13 +287,15 @@ const WishList = (props: any) => {
               {!props.user && (
                 <CustomTabPanel value={value} index={1}>
                   {/* // ユーザーがいない場合に表示させるパネル*/}
-                  <div>
+                  <div className={styles.login}>
                     <p>
+                      {" "}
+                      <br />
                       ログインしてへんで！
                       <br />
                       いいねが保存されへんからログインかアカウント作るか
                       <br />
-                      どっちかしてや！
+                      どっちかしてや！ <br /> <br />
                     </p>
                     <Button variant="contained">
                       <Link href="/signin">signin</Link>

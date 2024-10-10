@@ -146,6 +146,10 @@ a.secondary {
   justify-content: center;
 }
 
+.login {
+  color: #1a1a1a;
+}
+
 /* Enable hover only on non-touch devices */
 @media (hover: hover) and (pointer: fine) {
   a.primary:hover {
