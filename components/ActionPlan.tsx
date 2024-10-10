@@ -11,11 +11,15 @@ import { TransitionProps } from "@mui/material/transitions";
 import { useRouter } from "next/router";
 import axios from "axios";
 import Cookies from "js-cookie";
+import { useState } from "react";
 
 interface ForgotPasswordProps {
   open: boolean;
   handleClose: () => void;
   props: any;
+  setLoading: any;
+  setOpenResponse: any;
+  setResponse: any;
 }
 
 const Transition = React.forwardRef(function Transition(
@@ -31,14 +35,19 @@ export default function ActionPlan({
   open,
   handleClose,
   props,
+  setLoading,
+  setOpenResponse,
+  setResponse,
 }: ForgotPasswordProps) {
   //////////// アクションプラン作成リクエスト ////////////
+
   const router = useRouter();
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+    setLoading(true); // ローディング開始
     try {
-      await axios.post(
+      const response = await axios.post(
         `${props.domain}/chats`,
         { request: data.get("request") },
         {
@@ -49,7 +58,12 @@ export default function ActionPlan({
           },
         }
       );
-      router.push("/"); //リダイレクト
+      setLoading(false); // ローディング終了
+
+      // alert(`${JSON.stringify(response.data.content)}`); // レスポンスデータを表示する
+      setResponse(`${JSON.stringify(`${response.data.content}`)}`);
+      setOpenResponse(true);
+      // router.push("/"); //リダイレクト
     } catch (err) {
       alert("アクションプランのリクエストに失敗しました");
     }

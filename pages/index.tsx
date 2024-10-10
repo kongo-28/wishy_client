@@ -13,6 +13,8 @@ import { Container } from "@mui/material";
 import Tooltip from "@mui/material/Tooltip";
 import ActionPlan from "@/components/ActionPlan";
 import Candidate from "@/components/Candidate";
+import Response from "@/components/Response";
+import CircularProgress from "@mui/material/CircularProgress";
 
 export const getServerSideProps: GetServerSideProps =
   withAuthServerSideProps("/wishes");
@@ -38,6 +40,8 @@ const Home = (props: any) => {
     setOpenAction(false);
   };
 
+  const [loading, setLoading] = useState(false); // ローディング状態を管理
+
   /////////////// ACTION PLAN ////////////
   /////////////// Candidate ////////////
   const [openCandidate, setOpenCandidate] = useState(false);
@@ -50,15 +54,41 @@ const Home = (props: any) => {
   };
 
   /////////////// Candidate ////////////
+  /////////////// Response ////////////
+  const [openResponse, setOpenResponse] = useState(false);
+  const [response, setResponse] = useState("レスポンス！");
+
+  const handleClickOpenResponse = () => {
+    setOpenResponse(true);
+  };
+  const handleCloseResponse = () => {
+    setOpenResponse(false);
+  };
+
+  /////////////// Response ////////////
   return (
     <div>
       <ResponsiveAppBar domain={props.domain} />
-
+      {loading && (
+        <Box sx={{ display: "flex" }}>
+          {/* ローディング中の表示 */}
+          <CircularProgress />
+        </Box>
+      )}
       <NewWish open={open} handleClose={handleCloseNew} props={props} />
+      <Response
+        open={openResponse}
+        handleClose={handleCloseResponse}
+        props={props}
+        response={response}
+      />
       <ActionPlan
         open={openAction}
         handleClose={handleCloseAction}
         props={props}
+        setLoading={setLoading}
+        setOpenResponse={setOpenResponse}
+        setResponse={setResponse}
       />
       <Candidate
         open={openCandidate}
