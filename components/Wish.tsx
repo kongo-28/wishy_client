@@ -72,7 +72,11 @@ const Wish = ({ wish, user, domain }: any) => {
           }}
         >
           {likes == 0 && <FavoriteIcon />}
-          {likes >= 1 && <FavoriteIcon sx={{ color: pink[500] }} />}
+          {likes >= 1 && likes < 1000 && (
+            <FavoriteIcon sx={{ color: pink[200] }} />
+          )}
+          {likes >= 1000 && <FavoriteIcon sx={{ color: pink[500] }} />}
+
           {likes < 1000 && <p>{likes}</p>}
           {likes >= 1000 && likes < 1000000 && (
             <p>{(likes / 1000).toFixed(2)}k</p>
@@ -87,7 +91,10 @@ const Wish = ({ wish, user, domain }: any) => {
           }}
         >
           {likes == 0 && <LocalFireDepartmentIcon sx={{ fontSize: 50 }} />}
-          {likes >= 1 && (
+          {likes >= 1 && likes < 1000 && (
+            <LocalFireDepartmentIcon sx={{ fontSize: 50, color: pink[200] }} />
+          )}
+          {likes >= 1000 && (
             <LocalFireDepartmentIcon sx={{ fontSize: 50, color: pink[500] }} />
           )}
         </IconButton>
