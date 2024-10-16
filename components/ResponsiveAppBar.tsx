@@ -18,7 +18,7 @@ import Cookies from "js-cookie";
 import axios from "axios";
 
 const pages = [
-  "chat",
+  "archive",
   // "New_Wish",
   // , "Pricing", "Blog"
 ];
