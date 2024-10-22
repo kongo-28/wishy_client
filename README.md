@@ -34,3 +34,16 @@
 
 - belongs_to :user
 - belongs_to :wish
+
+## chats テーブル
+
+| Column  | Type       | Options                       |
+| :------ | :--------- | :---------------------------- |
+| title   | integer    | null:false                    |
+| count   | integer    | null:false                    |
+| request | integer    |                               |
+| user    | references | null:false, foreign_key: true |
+
+### Association
+
+- belongs_to :user
