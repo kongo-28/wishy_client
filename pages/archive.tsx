@@ -16,7 +16,7 @@ import CardHeader from "@mui/material/CardHeader";
 export const getServerSideProps: GetServerSideProps =
   withAuthServerSideProps("/chats");
 
-const Chat = (props: any) => {
+const Archive = (props: any) => {
   /////////////// NEW WISH////////////////
   const [open, setOpen] = useState(false);
 
@@ -61,4 +61,4 @@ const Chat = (props: any) => {
   );
 };
 
-export default Chat;
+export default Archive;
