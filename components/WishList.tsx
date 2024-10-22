@@ -54,7 +54,7 @@ const WishList = (props: any) => {
     let newSortOrder;
     let sortedWishes;
 
-    if (sortOrder === "none") {
+    if (sortOrder === "descend") {
       sortedWishes = [...props.wishes].sort((a, b) => {
         if (a.updated_at < b.updated_at) return -1;
         if (a.updated_at > b.updated_at) return 1;
@@ -62,15 +62,15 @@ const WishList = (props: any) => {
       });
       newSortOrder = "ascend";
     } else if (sortOrder === "ascend") {
+      sortedWishes = props.wishes;
+      newSortOrder = "none";
+    } else {
       sortedWishes = [...props.wishes].sort((a, b) => {
         if (a.updated_at < b.updated_at) return 1;
         if (a.updated_at > b.updated_at) return -1;
         return 0;
       });
       newSortOrder = "descend";
-    } else {
-      sortedWishes = props.wishes;
-      newSortOrder = "none";
     }
 
     setSortedWishes(sortedWishes);
@@ -84,19 +84,19 @@ const WishList = (props: any) => {
     const getLikesCount = (wish: any) =>
       wish.likes && wish.likes[0] ? wish.likes[0].count : 0;
 
-    if (sortOrder === "none") {
+    if (sortOrder === "likes_descend") {
       sortedWishes = [...props.wishes].sort((a, b) => {
         return getLikesCount(a) - getLikesCount(b);
       });
       newSortOrder = "likes_ascend";
     } else if (sortOrder === "likes_ascend") {
+      sortedWishes = props.wishes;
+      newSortOrder = "none";
+    } else {
       sortedWishes = [...props.wishes].sort((a, b) => {
         return getLikesCount(b) - getLikesCount(a);
       });
       newSortOrder = "likes_descend";
-    } else {
-      sortedWishes = props.wishes;
-      newSortOrder = "none";
     }
 
     setSortedWishes(sortedWishes);
@@ -112,19 +112,19 @@ const WishList = (props: any) => {
         ? wish.likes_user_count
         : 0;
 
-    if (sortOrder === "none") {
+    if (sortOrder === "likes_user_count_descend") {
       sortedWishes = [...props.wishes].sort((a, b) => {
         return getUsersCount(a) - getUsersCount(b);
       });
       newSortOrder = "likes_user_count_ascend";
     } else if (sortOrder === "likes_user_count_ascend") {
+      sortedWishes = props.wishes;
+      newSortOrder = "none";
+    } else {
       sortedWishes = [...props.wishes].sort((a, b) => {
         return getUsersCount(b) - getUsersCount(a);
       });
       newSortOrder = "likes_user_count_descend";
-    } else {
-      sortedWishes = props.wishes;
-      newSortOrder = "none";
     }
 
     setSortedWishes(sortedWishes);
@@ -138,7 +138,7 @@ const WishList = (props: any) => {
     let newSortOrderUser;
     let sortedWishesUser;
 
-    if (sortOrderUser === "none") {
+    if (sortOrderUser === "descend") {
       sortedWishesUser = [...props.wishes_user].sort((a, b) => {
         if (a.updated_at < b.updated_at) return -1;
         if (a.updated_at > b.updated_at) return 1;
@@ -146,15 +146,15 @@ const WishList = (props: any) => {
       });
       newSortOrderUser = "ascend";
     } else if (sortOrderUser === "ascend") {
+      sortedWishesUser = props.wishes_user;
+      newSortOrderUser = "none";
+    } else {
       sortedWishesUser = [...props.wishes_user].sort((a, b) => {
         if (a.updated_at < b.updated_at) return 1;
         if (a.updated_at > b.updated_at) return -1;
         return 0;
       });
       newSortOrderUser = "descend";
-    } else {
-      sortedWishesUser = props.wishes_user;
-      newSortOrderUser = "none";
     }
 
     setSortedWishesUser(sortedWishesUser);
@@ -165,7 +165,7 @@ const WishList = (props: any) => {
     let newSortOrderUser;
     let sortedWishesUser;
 
-    if (sortOrderUser === "none") {
+    if (sortOrderUser === "likes_descend") {
       sortedWishesUser = [...props.wishes_user].sort((a, b) => {
         if (a.likes[0].count < b.likes[0].count) return -1;
         if (a.likes[0].count > b.likes[0].count) return 1;
@@ -173,15 +173,15 @@ const WishList = (props: any) => {
       });
       newSortOrderUser = "likes_ascend";
     } else if (sortOrderUser === "likes_ascend") {
+      sortedWishesUser = props.wishes_user;
+      newSortOrderUser = "none";
+    } else {
       sortedWishesUser = [...props.wishes_user].sort((a, b) => {
         if (a.likes[0].count < b.likes[0].count) return 1;
         if (a.likes[0].count > b.likes[0].count) return -1;
         return 0;
       });
       newSortOrderUser = "likes_descend";
-    } else {
-      sortedWishesUser = props.wishes_user;
-      newSortOrderUser = "none";
     }
 
     setSortedWishesUser(sortedWishesUser);
@@ -192,7 +192,7 @@ const WishList = (props: any) => {
     let newSortOrderUser;
     let sortedWishesUser;
 
-    if (sortOrderUser === "none") {
+    if (sortOrderUser === "likes_user_count_descend") {
       sortedWishesUser = [...props.wishes_user].sort((a, b) => {
         if (a.likes_user_count < b.likes_user_count) return -1;
         if (a.likes_user_count > b.likes_user_count) return 1;
@@ -200,15 +200,15 @@ const WishList = (props: any) => {
       });
       newSortOrderUser = "likes_user_count_ascend";
     } else if (sortOrderUser === "likes_user_count_ascend") {
+      sortedWishesUser = props.wishes_user;
+      newSortOrderUser = "none";
+    } else {
       sortedWishesUser = [...props.wishes_user].sort((a, b) => {
         if (a.likes_user_count < b.likes_user_count) return 1;
         if (a.likes_user_count > b.likes_user_count) return -1;
         return 0;
       });
       newSortOrderUser = "likes_user_count_descend";
-    } else {
-      sortedWishesUser = props.wishes_user;
-      newSortOrderUser = "none";
     }
 
     setSortedWishesUser(sortedWishesUser);
@@ -227,10 +227,7 @@ const WishList = (props: any) => {
               onChange={handleChange}
               aria-label="basic tabs example"
             >
-              <Tab
-                label="ALL WISH"
-                {...a11yProps(0)}
-              />
+              <Tab label="ALL WISH" {...a11yProps(0)} />
               <Tab label="MY WISH" {...a11yProps(1)} />
             </Tabs>
           </Box>
