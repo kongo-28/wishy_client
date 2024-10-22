@@ -67,9 +67,17 @@ const Home = (props: any) => {
     <div>
       <ResponsiveAppBar domain={props.domain} />
       {loading && (
-        <Box sx={{ display: "flex" }}>
+        <Box
+          position="fixed"
+          top="50%"
+          margin="auto"
+          left="50%"
+          sx={{ display: "flex" }}
+        >
           {/* ローディング中の表示 */}
-          <CircularProgress />
+          <Box position="relative" left="-20px">
+            <CircularProgress />
+          </Box>
         </Box>
       )}
       <NewWish open={open} handleClose={handleCloseNew} props={props} />
