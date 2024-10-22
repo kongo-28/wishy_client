@@ -8,7 +8,6 @@ import Tab from "@mui/material/Tab";
 import Button from "@mui/material/Button";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
-import { Container } from "@mui/material";
 import { pink } from "@mui/material/colors";
 
 const WishList = (props: any) => {
@@ -231,12 +230,10 @@ const WishList = (props: any) => {
               <Tab
                 label="ALL WISH"
                 {...a11yProps(0)}
-                //  sx={{ width: 300 }}
               />
               <Tab label="MY WISH" {...a11yProps(1)} />
             </Tabs>
           </Box>
-          {/* </Container> */}
           <div className={styles.wishListBoxContainer}>
             <div className={styles.wishListBox}>
               <CustomTabPanel value={value} index={0}>
