@@ -37,7 +37,7 @@ export default function NewWish({ open, handleClose, props }: NewWishProps) {
         content: data.get("content"),
       });
 
-      router.push("/"); //リダイレクト
+      router.reload(); //リダイレクト
     } catch (err) {
       alert("投稿に失敗しました");
     }
