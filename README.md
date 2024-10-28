@@ -24,7 +24,20 @@ https://wishy-client.vercel.app/
 
 私自身新しいことへの挑戦が好きです。しかし働き始めると情報収集や具体的なアクションプランを立てる時間を確保することが難しくなり、何もしないまま終える休日ができるようになりました。これを解決する為に、できるだけ労力と時間をかけずに wish リストの作成ができ、アクションプラン作成まで出来る本アプリケーションを開発するに至りました。
 
-# テーブル設計
+# データベース設計
+
+[![Image from Gyazo](https://i.gyazo.com/b639ca472c4cac9a80dcfe4027afc020.png)](https://gyazo.com/b639ca472c4cac9a80dcfe4027afc020)
+
+# 開発環境
+
+- next.js
+- ruby on rails
+- vercel
+- render
+- VS code
+- github
+
+<!-- # テーブル設計
 
 ## users テーブル
 
@@ -72,4 +85,4 @@ https://wishy-client.vercel.app/
 
 ### Association
 
-- belongs_to :user
+- belongs_to :user -->
