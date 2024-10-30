@@ -30,7 +30,7 @@ const Archive = (props: any) => {
 
   return (
     <div>
-      <ResponsiveAppBar domain={props.domain} />
+      <ResponsiveAppBar domain={props.domain} user={props.user} />
       <NewWish open={open} handleClose={handleCloseNew} props={props} />
       <Container maxWidth="md">
         <Box

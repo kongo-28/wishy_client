@@ -66,7 +66,7 @@ const Home = (props: any) => {
   /////////////// Response ////////////
   return (
     <div>
-      <ResponsiveAppBar domain={props.domain} />
+      <ResponsiveAppBar domain={props.domain} user={props.user} />
       {loading && (
         <Box position="fixed" top="50%" left="50%" sx={{ display: "flex" }}>
           {/* ローディング中の表示 */}

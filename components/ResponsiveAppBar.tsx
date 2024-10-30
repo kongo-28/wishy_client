@@ -29,7 +29,7 @@ const settings: any = [
   // , "Account", "Dashboard"
 ];
 
-function ResponsiveAppBar({ domain }: any) {
+function ResponsiveAppBar({ domain, user }: any) {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
@@ -159,11 +159,13 @@ function ResponsiveAppBar({ domain }: any) {
               ))}
             </Box>
             <Box sx={{ flexGrow: 0 }}>
-              <Tooltip title="Logout">
-                <IconButton onClick={handleOpenUserMenu}>
-                  <LogoutIcon />
-                </IconButton>
-              </Tooltip>
+              {user && (
+                <Tooltip title="Logout">
+                  <IconButton onClick={handleOpenUserMenu}>
+                    <LogoutIcon />
+                  </IconButton>
+                </Tooltip>
+              )}
               <Menu
                 sx={{ mt: "45px" }}
                 id="menu-appbar"
