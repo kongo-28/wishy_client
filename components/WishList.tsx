@@ -370,18 +370,9 @@ const WishList = (props: any) => {
                     <p>
                       {" "}
                       <br />
-                      ログインしてへんで！
                       <br />
-                      いいねが保存されへんからログインかアカウント作るか
                       <br />
-                      どっちかしてや！ <br /> <br />
                     </p>
-                    <Button variant="contained">
-                      <Link href="/signin">signin</Link>
-                    </Button>
-                    <Button variant="contained">
-                      <Link href="/signup">signup</Link>
-                    </Button>
                   </div>
                 </CustomTabPanel>
               )}
