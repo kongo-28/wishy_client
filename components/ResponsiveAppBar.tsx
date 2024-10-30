@@ -16,14 +16,16 @@ import HomeIcon from "@mui/icons-material/Home";
 import { useRouter } from "next/router";
 import Cookies from "js-cookie";
 import axios from "axios";
+import LogoutIcon from "@mui/icons-material/Logout";
+import { Fab } from "@mui/material";
 
 const pages = [
   "archive",
   // "New_Wish",
   // , "Pricing", "Blog"
 ];
-const settings = [
-  "---",
+const settings: any = [
+  // "---",
   // , "Account", "Dashboard"
 ];
 
@@ -157,9 +159,9 @@ function ResponsiveAppBar({ domain }: any) {
               ))}
             </Box>
             <Box sx={{ flexGrow: 0 }}>
-              <Tooltip title="Open settings">
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="Remy Sharp" src="" />
+              <Tooltip title="Logout">
+                <IconButton onClick={handleOpenUserMenu}>
+                  <LogoutIcon />
                 </IconButton>
               </Tooltip>
               <Menu
@@ -178,14 +180,6 @@ function ResponsiveAppBar({ domain }: any) {
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
               >
-                {settings.map((setting) => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography sx={{ textAlign: "center" }}>
-                      {setting}
-                      {/* <Link href={`/${setting.toLowerCase()}`}>{setting}</Link> */}
-                    </Typography>
-                  </MenuItem>
-                ))}
                 <MenuItem onClick={handleLogout}>
                   <Typography sx={{ textAlign: "center" }}>Logout</Typography>
                 </MenuItem>
