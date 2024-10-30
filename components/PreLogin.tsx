@@ -31,7 +31,7 @@ const PreLogin = () => {
               <Button
                 variant="contained"
                 sx={{
-                  width: 300,
+                  width: 500,
                   borderRadius: 0,
                 }}
               >
@@ -40,7 +40,7 @@ const PreLogin = () => {
               <Button
                 variant="contained"
                 sx={{
-                  width: 300,
+                  width: 500,
                   borderRadius: 0,
                 }}
               >
