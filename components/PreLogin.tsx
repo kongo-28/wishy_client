@@ -29,22 +29,24 @@ const PreLogin = () => {
             </CardContent>
             <CardActions>
               <Button
+                href="/signin"
                 variant="contained"
                 sx={{
                   width: 500,
                   borderRadius: 0,
                 }}
               >
-                <Link href="/signin">signin</Link>
+                signin
               </Button>
               <Button
+                href="/signup"
                 variant="contained"
                 sx={{
                   width: 500,
                   borderRadius: 0,
                 }}
               >
-                <Link href="/signup">signup</Link>
+                signup
               </Button>
             </CardActions>
           </Card>
