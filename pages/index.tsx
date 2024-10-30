@@ -15,6 +15,7 @@ import ActionPlan from "@/components/ActionPlan";
 import Candidate from "@/components/Candidate";
 import Response from "@/components/Response";
 import CircularProgress from "@mui/material/CircularProgress";
+import PreLogin from "@/components/PreLogin";
 
 export const getServerSideProps: GetServerSideProps =
   withAuthServerSideProps("/wishes");
@@ -118,6 +119,7 @@ const Home = (props: any) => {
             handleClickOpenCandidate={handleClickOpenCandidate}
           ></Profile>
         )}
+        {!props.user && <PreLogin></PreLogin>}
 
         <WishList
           wishes={props.wishes}
