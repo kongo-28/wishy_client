@@ -8,6 +8,7 @@ import CardHeader from "@mui/material/CardHeader";
 import Avatar from "@mui/material/Avatar";
 import { red } from "@mui/material/colors";
 import { Paper } from "@mui/material";
+import Link from "next/link";
 
 const PreLogin = () => {
   return (
@@ -34,7 +35,7 @@ const PreLogin = () => {
                   borderRadius: 0,
                 }}
               >
-                wish候補
+                <Link href="/signin">signin</Link>
               </Button>
               <Button
                 variant="contained"
@@ -43,16 +44,7 @@ const PreLogin = () => {
                   borderRadius: 0,
                 }}
               >
-                プラン作成
-              </Button>
-              <Button
-                variant="contained"
-                sx={{
-                  width: 300,
-                  borderRadius: 0,
-                }}
-              >
-                リスト共有
+                <Link href="/signup">signup</Link>
               </Button>
             </CardActions>
           </Card>
